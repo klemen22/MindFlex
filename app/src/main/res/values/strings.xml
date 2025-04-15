@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MindFlex</string>
+    <string name="mindflex">MindFlex</string>
+    <string name="logo">logo</string>
+    <string name="menu">menu</string>
+    <string name="stats">stats</string>
+    <string name="title_activity_reaction_game">ReactionGameActivity</string>
+</resources>

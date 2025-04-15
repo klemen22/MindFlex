@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:gravity="bottom"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/drawer_back_button"
+        android:layout_marginTop="22dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:src="@drawable/back100"/>
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/logo_temp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MindFlex"
+        android:textSize="24sp"
+        android:fontFamily="@font/rajdhani_medium"
+        android:textColor="@color/black"
+        android:includeFontPadding="false"/>
+
+</LinearLayout>
+
