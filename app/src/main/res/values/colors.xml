@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Placeholder colors -->
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#C64848</color>
@@ -10,4 +13,17 @@
     <color name="yellow">#F1F145</color>
     <color name="pink">#E521F6</color>
     <color name="gray_shadow">#696969</color>
+    <color name="overlay_dimmed">#80000000</color>
+
+
+    <!-- Sequence memory game colors -->
+
+    <color name="sequence_main">#008ACF</color>
+    <color name="sequence_background">#005B8C</color>
+    <color name="sequence_background_dark">#003B5C</color>
+    <color name="sequence_highlight">#66C2EC</color>
+    <color name="sequence_success">#0ED00E</color>
+    <color name="sequence_error">#C64848</color>
+
+
 </resources>

@@ -1,38 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="14sp">
+    android:layout_height="match_parent">
 
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:id="@+id/back_button"
-        android:textSize="16sp"
-        android:includeFontPadding="false"
-        android:fontFamily="@font/rajdhani_regular"
-        android:textColor="@color/black"
-        android:text="Back"/>
-
-    <LinearLayout
+    <View
+        android:id="@+id/sequence_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:background="@color/overlay_dimmed"
+        android:elevation="100dp"
+        android:visibility="visible"/>
+
+    <!-- Start screen -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/sequence_start"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:background="@drawable/sequence_small_screen_background"
+        android:elevation="100dp"
+        android:visibility="visible">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sequence memory game placeholder"
-            android:textSize="24sp"
-            android:fontFamily="@font/rajdhani_medium"
-            android:textColor="@color/black"
-            android:includeFontPadding="false" />
+            android:text="Sequence Memory Game"
+            android:layout_gravity="center"
+            android:textSize="26sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/rajdhani_semibold"/>
+
+        <Button
+            android:id="@+id/sequence_start_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:text="Start"
+            android:includeFontPadding="false"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/rajdhani_regular"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/sequence_background"/>
 
     </LinearLayout>
 
+    <!-- Main game screen -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="14sp"
+        android:backgroundTint="@color/sequence_main"
+        android:visibility="visible">
 
-</LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/sequence_game_back"
+            android:textSize="16sp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/rajdhani_regular"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/sequence_background"
+            android:text="Back" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/sequence_game_score"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Level: 1"
+                android:fontFamily="@font/rajdhani_regular"
+                android:textSize="26sp"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+
+        <GridLayout
+            android:id="@+id/sequence_game_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:columnCount="4"
+            android:rowCount="4"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <!-- Game over screen -->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/sequence_game_over"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:elevation="100dp"
+        android:background="@drawable/sequence_small_screen_background"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="260dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Game over Bozo!"
+            android:textSize="26sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/rajdhani_semibold"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/sequence_back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Back"
+                android:layout_marginEnd="16dp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/rajdhani_regular"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/sequence_background"
+                android:layout_weight="1"/>
+
+
+            <Button
+                android:id="@+id/sequence_play_again_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Play again"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/rajdhani_regular"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/sequence_background"
+                android:layout_weight="0.3"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
+
+

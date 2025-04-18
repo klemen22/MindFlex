@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         gameItemList.add(new GameItem("Reaction Time", R.drawable.lightning_bolt_white100, getResources().getColor(R.color.red), "Placeholder1", ReactionGameActivity.class));
         gameItemList.add(new GameItem("Number Memory", R.drawable.numbers_white100, getResources().getColor(R.color.orange), "Placeholder2", NumberGameActivity.class));
         gameItemList.add(new GameItem("Letter Memory", R.drawable.wordbook_white100, getResources().getColor(R.color.green), "Placeholder3", LetterGameActivity.class));
-        gameItemList.add(new GameItem("Sequence Memory", R.drawable.grid_white100, getResources().getColor(R.color.blue), "Placeholder4", SequenceMemoryGameActivity.class));
+        gameItemList.add(new GameItem("Sequence Memory", R.drawable.grid_white100, getResources().getColor(R.color.sequence_main), "Placeholder4", SequenceMemoryGameActivity.class));
 
         //set adapter
         tileAdapter = new TileAdapter(gameItemList);
