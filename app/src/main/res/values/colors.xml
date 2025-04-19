@@ -25,5 +25,13 @@
     <color name="sequence_success">#0ED00E</color>
     <color name="sequence_error">#C64848</color>
 
+    <!-- Chimp test game colors -->
+
+    <color name="chimp_main">#B3A7DD</color>
+    <color name="chimp_background">#8C7DB2</color>
+    <color name="chimp_background_dark">#4A3F66</color>
+    <color name="chimp_highlight">#E3DEF5</color>
+    <color name="chimp_highlight_dark">#CFC6EB</color>
+
 
 </resources>
