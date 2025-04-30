@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MindFlex"
         tools:targetApi="31">
         <activity
+            android:name=".game.activites.TypingGame"
+            android:exported="false" />
+        <activity
             android:name=".game.activites.ChimpTestActivity"
             android:exported="false" />
         <activity

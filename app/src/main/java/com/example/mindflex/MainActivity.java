@@ -27,6 +27,7 @@ import com.example.mindflex.game.activites.LetterGameActivity;
 import com.example.mindflex.game.activites.NumberGameActivity;
 import com.example.mindflex.game.activites.ReactionGameActivity;
 import com.example.mindflex.game.activites.SequenceMemoryGameActivity;
+import com.example.mindflex.game.activites.TypingGame;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         gameItemList.add(new GameItem("Letter Memory", R.drawable.wordbook_white100, getResources().getColor(R.color.green), "Placeholder3", LetterGameActivity.class));
         gameItemList.add(new GameItem("Sequence Memory", R.drawable.grid_white100, getResources().getColor(R.color.sequence_main), "Placeholder4", SequenceMemoryGameActivity.class));
         gameItemList.add(new GameItem("Chimp Game", R.drawable.monkey_white100, getResources().getColor(R.color.chimp_main), "Placeholder5", ChimpTestActivity.class));
+        gameItemList.add(new GameItem("Typing Game", R.drawable.keyboard_white100, getResources().getColor(R.color.type_main), "Placeholder6", TypingGame.class));
+
         //set adapter
         tileAdapter = new TileAdapter(gameItemList);
         recyclerView.setAdapter(tileAdapter);
