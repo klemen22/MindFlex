@@ -15,44 +15,53 @@
         android:visibility="visible" />
 
     <!-- Start screen -->
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/type_game_start_screen"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/typing_game_small_background"
-        android:elevation="100dp"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:visibility="visible">
+        android:elevation="8dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/type_background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="100dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/rajdhani_semibold"
-            android:includeFontPadding="false"
-            android:text="Typing game"
-            android:textColor="@color/white"
-            android:textSize="26sp" />
+            android:background="@drawable/typing_game_box_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-        <Button
-            android:id="@+id/type_start_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/type_background_dark"
-            android:fontFamily="@font/rajdhani_regular"
-            android:includeFontPadding="false"
-            android:text="Start"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:includeFontPadding="false"
+                android:text="Typing game"
+                android:textColor="@color/type_text_primary"
+                android:textSize="26sp" />
+
+            <Button
+                android:id="@+id/type_start_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/type_main"
+                android:fontFamily="@font/rajdhani_regular"
+                android:paddingVertical="12dp"
+                android:text="Start"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
     <!-- Main game screen -->
     <LinearLayout
+        android:id="@+id/type_game_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/typing_game_big_background"
@@ -60,29 +69,17 @@
         android:padding="14dp"
         android:visibility="visible">
 
-        <Button
-            android:id="@+id/type_game_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/type_background_dark"
-            android:fontFamily="@font/rajdhani_regular"
-            android:includeFontPadding="false"
-            android:text="Back"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
         <TextView
             android:id="@+id/type_game_round"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Round 0"
             android:layout_gravity="center"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/rajdhani_semibold"
-            android:textSize="26sp"
-            android:textColor="@color/white"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+            android:text="Round 1"
+            android:textColor="@color/type_text_primary"
+            android:textSize="28sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,22 +92,22 @@
                 android:id="@+id/type_game_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.4"
                 android:fontFamily="@font/rajdhani_regular"
                 android:gravity="center"
                 android:text="Time: 00:00"
-                android:textColor="@color/white"
+                android:textColor="@color/type_text_primary"
                 android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/type_game_wpm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:fontFamily="@font/rajdhani_regular"
                 android:gravity="center"
                 android:text="WPM: 0"
-                android:textColor="@color/white"
+                android:textColor="@color/type_text_primary"
                 android:textSize="22sp" />
         </LinearLayout>
 
@@ -139,7 +136,7 @@
                     android:includeFontPadding="false"
                     android:padding="10dp"
                     android:text=""
-                    android:textColor="@color/white"
+                    android:textColor="@color/type_text_primary"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -147,27 +144,91 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
                 android:layout_marginTop="20dp"
+                android:layout_weight="0.5"
                 android:background="@drawable/typing_game_box_background">
 
                 <EditText
                     android:id="@+id/type_game_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rajdhani_regular"
                     android:background="@null"
+                    android:fontFamily="@font/rajdhani_regular"
                     android:gravity="top"
                     android:hint="Start typing here..."
                     android:includeFontPadding="false"
                     android:inputType="textMultiLine|textLongMessage"
-                    android:singleLine="false"
-                    android:scrollHorizontally="false"
                     android:padding="10dp"
-                    android:textColor="@color/white"
+                    android:scrollHorizontally="false"
+                    android:singleLine="false"
+                    android:textColor="@color/type_text_primary"
+                    android:textColorHint="@color/type_text_primary"
                     android:textSize="18sp" />
 
             </LinearLayout>
         </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/type_game_menu_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/menu_colored100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tint="@color/type_border_soft" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <!-- Game menu -->
+    <LinearLayout
+        android:id="@+id/type_game_menu"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/typing_game_menu_background"
+        android:elevation="100dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="14dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/type_game_menu_back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/back_thin100"
+            app:tint="@color/type_border_soft" />
+
+        <ImageView
+            android:id="@+id/type_game_menu_play_button"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/play_outline100"
+            app:tint="@color/type_border_soft" />
+
+        <ImageView
+            android:id="@+id/type_game_menu_retry_button"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/retry100"
+            app:tint="@color/type_border_soft" />
     </LinearLayout>
 </FrameLayout>

@@ -15,25 +15,35 @@
     <color name="overlay_dimmed">#80000000</color>
 
     <!-- Sequence memory game colors -->
-    <color name="sequence_main">#008ACF</color>
-    <color name="sequence_background">#005B8C</color>
-    <color name="sequence_background_dark">#003B5C</color>
-    <color name="sequence_highlight">#66C2EC</color>
-    <color name="sequence_success">#0ED00E</color>
-    <color name="sequence_error">#C64848</color>
+    <color name="sequence_main">#5A9BD8</color>
+    <color name="sequence_background">#DDEAF6</color>
+    <color name="sequence_background_dark">#D6E8F5</color>
+    <color name="sequence_highlight">#B3D9FF</color>
+    <color name="sequence_highlight_dark">#80C1FF</color>
+    <color name="sequence_success">#5FD87B</color>
+    <color name="sequence_error">#E57373</color>
+    <color name="sequence_text_primary">#2E2E2E</color>
+    <color name="sequence_light_text">#FFFFFF</color>
+    <color name="sequence_border_soft">#A3CCE6</color>
 
     <!-- Chimp test game colors -->
-    <color name="chimp_main">#B3A7DD</color>
-    <color name="chimp_background">#8C7DB2</color>
-    <color name="chimp_background_dark">#4A3F66</color>
-    <color name="chimp_highlight">#E3DEF5</color>
-    <color name="chimp_highlight_dark">#CFC6EB</color>
+    <color name="chimp_main">#A086D3</color>
+    <color name="chimp_background">#EDE4F6</color>
+    <color name="chimp_background_dark">#775DB2</color>
+    <color name="chimp_highlight">#E3D9F8</color>
+    <color name="chimp_highlight_dark">#C3AFE3</color>
+    <color name="chimp_text_primary">#2E2E2E</color>
+    <color name="chimp_light_text">#FFFFFF</color>
+    <color name="chimp_border_soft">#D4C4EA</color>
 
     <!-- Typing game colors -->
-    <color name="type_main">#FF6F61</color>
-    <color name="type_background">#D65A4F</color>
-    <color name="type_background_dark">#993F35</color>
-    <color name="type_highlight">#FFD8D3</color>
-    <color name="type_highlight_dark">#F5A99E</color>
+    <color name="type_main">#FF8364</color>
+    <color name="type_background">#FFF4F0</color>
+    <color name="type_background_dark">#F15B41</color>
+    <color name="type_highlight">#FFE4DC</color>
+    <color name="type_highlight_dark">#FFB29B</color>
+    <color name="type_text_primary">#2E2E2E</color>
+    <color name="type_light_text">#FFF3F0</color>
+    <color name="type_border_soft">#F5A99E</color>
 
 </resources>

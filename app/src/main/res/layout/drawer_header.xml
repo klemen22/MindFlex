@@ -13,12 +13,12 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="10dp"
-        android:src="@drawable/back100"/>
+        android:src="@drawable/back_colored100"/>
 
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/logo_temp" />
+        android:src="@drawable/logo_main2" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -1,6 +1,4 @@
 package com.example.mindflex.game.activites;
-
-import android.animation.ObjectAnimator;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,15 +6,16 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.cardview.widget.CardView;
 import com.example.mindflex.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +31,20 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
     private int currentIndex = 0;
 
     private boolean input = false;
-    private LinearLayout startScreen;
-    private LinearLayout gameOverScreen;
+    private boolean gameFlag = false;
+    private CardView startScreen;
+    private CardView gameOverScreen;
     private Button startButton;
     private Button retryButton;
     private Button quitButton;
     private View overlay;
+    private LinearLayout sequenceMenu;
+    private LinearLayout sequenceMain;
+    private ImageView sequenceMenuBack;
+    private ImageView sequenceMenuPlay;
+    private ImageView sequenceMenuRestart;
+    private ImageView sequenceMenuButton;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -58,12 +65,6 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button backbutton = findViewById(R.id.sequence_game_back);
-
-        backbutton.setOnClickListener(v -> {
-            onBackPressed();
-        });
-
         // xml elements initialization
         gridLayout = findViewById(R.id.sequence_game_grid);
         scoreText = findViewById(R.id.sequence_game_score);
@@ -73,6 +74,14 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
         retryButton = findViewById(R.id.sequence_play_again_button);
         quitButton = findViewById(R.id.sequence_back_button);
         overlay = findViewById(R.id.sequence_overlay);
+        sequenceMain = findViewById(R.id.sequence_game_main);
+
+        // xml elements menu
+        sequenceMenu = findViewById(R.id.sequence_game_menu);
+        sequenceMenuBack = findViewById(R.id.sequence_game_menu_back_button);
+        sequenceMenuPlay = findViewById(R.id.sequence_game_menu_play_button);
+        sequenceMenuRestart = findViewById(R.id.sequence_game_menu_retry_button);
+        sequenceMenuButton = findViewById(R.id.sequence_game_menu_button);
 
         startButton.setOnClickListener(v -> {
             startScreen.setVisibility(View.GONE);
@@ -81,8 +90,48 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             round = 0;
             scoreText.setText("Level: "+ (round + 1));
             startRound();
+            gameFlag = true;
         });
 
+        sequenceMenuButton.setOnClickListener(v -> {
+            if(!gameFlag){
+                return;
+            }
+            input = false;
+
+            overlay.animate().alpha(1f).setDuration(250).withEndAction(()->overlay.setVisibility(View.VISIBLE)).start();
+            sequenceMenuButton.animate().alpha(0f).setDuration(200).withEndAction(()->sequenceMenuButton.setVisibility(View.GONE)).start();
+            sequenceMenu.setVisibility(View.VISIBLE);
+            sequenceMenu.setTranslationY(sequenceMenu.getHeight());
+            sequenceMain.animate().translationY(-80).setDuration(300).start();
+            sequenceMenu.animate().translationY(0).setDuration(400).start(); 
+
+            sequenceMenuBack.setOnClickListener(vv->{
+                onBackPressed();
+            });
+
+            sequenceMenuPlay.setOnClickListener(vv->{
+                input = true;
+                overlay.animate().alpha(0f).setDuration(250).withEndAction(()->overlay.setVisibility(View.GONE)).start();
+                sequenceMenuButton.animate().alpha(1f).setDuration(200).withEndAction(()->sequenceMenuButton.setVisibility(View.VISIBLE)).start();
+                sequenceMain.animate().translationY(0).setDuration(300).start();
+                sequenceMenu.animate().translationY(sequenceMenu.getHeight()).setDuration(400).withEndAction(()->sequenceMenu.setVisibility(View.GONE)).start();
+            });
+
+            sequenceMenuRestart.setOnClickListener(vv->{
+                Toast.makeText(this, "Restarting...", Toast.LENGTH_SHORT).show();
+                overlay.animate().alpha(0f).setDuration(250).withEndAction(()->overlay.setVisibility(View.GONE)).start();
+                sequenceMenuButton.animate().alpha(1f).setDuration(200).withEndAction(()->sequenceMenuButton.setVisibility(View.VISIBLE)).start();
+                sequenceMain.animate().translationY(0).setDuration(300).start();
+                sequenceMenu.animate().translationY(sequenceMenu.getHeight()).setDuration(400).withEndAction(()->sequenceMenu.setVisibility(View.GONE)).start();
+                round = 0;
+                scoreText.setText("Level: "+ (round + 1));
+                startRound();
+            });
+
+        });
+
+        // create tiles
         for (int i = 0; i < 16; i++){
             View tile = new View(this);
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
@@ -101,11 +150,8 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
 
                 // case of correct click
                 if(index == tilesSequence.get(currentIndex)){
-                    ObjectAnimator fadeIn = ObjectAnimator.ofFloat(tile, "alpha", 0f, 1f);
-                    fadeIn.setDuration(100);
-                    fadeIn.start();
+                    tile.animate().alpha(1f).setDuration(200).withEndAction(()->tile.setBackgroundResource(R.drawable.sequence_tile_background_correct)).start();
 
-                    tile.setBackgroundResource(R.drawable.sequence_tile_background_correct);
                     currentIndex++;
 
                     // round completed
@@ -118,10 +164,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
                 }
                 // case of incorrect click
                 else{
-                    ObjectAnimator fadeIn = ObjectAnimator.ofFloat(tile, "alpha", 0f, 1f);
-                    fadeIn.setDuration(100);
-                    fadeIn.start();
-                    tile.setBackgroundResource(R.drawable.sequence_tile_background_error);
+                    tile.animate().alpha(1f).setDuration(200).withEndAction(()->tile.setBackgroundResource(R.drawable.sequence_tile_background_error)).start();
                     input = false;
                     gameOverScreen.setVisibility(View.VISIBLE);
                     overlay.setVisibility(View.VISIBLE);
@@ -152,16 +195,22 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
         for(View tile : tiles){
             tile.setBackgroundResource(R.drawable.sequence_tile_background);
         }
-
         tilesSequence.clear();
         currentIndex = 0;
+
+        if (round >= 50) {
+            input = false;
+            gameOverScreen.setVisibility(View.VISIBLE);
+            overlay.setVisibility(View.VISIBLE);
+            return;
+        }
 
         for(int i = 0; i < round + 1; i++){
             int randomNum = (int) (Math.random() * 16);
             tilesSequence.add(randomNum);
         }
 
-        new Handler(Looper.getMainLooper()).postDelayed(this::showSequence, 1000);
+        new Handler(Looper.getMainLooper()).postDelayed(this::showSequence, 800);
     }
 
 
@@ -173,39 +222,23 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             View tile = tiles.get(index);
 
             tile.postDelayed(() -> {
-                ObjectAnimator fadeIn = ObjectAnimator.ofFloat(tile, "alpha", 0f, 1f);
-                fadeIn.setDuration(200);
-                fadeIn.start();
-
-                ObjectAnimator scaleX = ObjectAnimator.ofFloat(tile, "scaleX", 0f, 1f);
-                ObjectAnimator scaleY = ObjectAnimator.ofFloat(tile, "scaleY", 0f, 1f);
-                scaleX.setDuration(200);
-                scaleY.setDuration(200);
-                scaleX.start();
-                scaleY.start();
-
+                tile.setAlpha(0f);
+                tile.animate().alpha(1f).setDuration(200).start();
                 tile.setBackgroundResource(R.drawable.sequence_tile_background_correct);
             }, i * 800);
 
             int finalI = i;
             tile.postDelayed(()->{
-                ObjectAnimator fadeOut = ObjectAnimator.ofFloat(tile, "alpha", 0f, 1f);
-                fadeOut.setDuration(200);
-                fadeOut.start();
+                tile.setAlpha(1f);
+                tile.animate().alpha(0f).setDuration(200).start();
+                tile.animate().alpha(1f).setDuration(200).withEndAction(()->{
+                    tile.setBackgroundResource(R.drawable.sequence_tile_background);
+                }).start();
 
-                ObjectAnimator scaleX = ObjectAnimator.ofFloat(tile, "scaleX", 0f, 1f);
-                ObjectAnimator scaleY = ObjectAnimator.ofFloat(tile, "scaleY", 0f, 1f);
-                scaleX.setDuration(200);
-                scaleY.setDuration(200);
-                scaleX.start();
-                scaleY.start();
-
-
-                tile.setBackgroundResource(R.drawable.sequence_tile_background);
                 if(finalI == tilesSequence.size() - 1){
                     input = true;
                 }
-            }, i * 800 + 1000);
+            }, i * 800 + 800);
 
         }
     }

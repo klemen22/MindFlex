@@ -12,219 +12,308 @@
         android:layout_height="match_parent"
         android:background="@color/overlay_dimmed"
         android:elevation="100dp"
-        android:visibility="visible"/>
+        android:visibility="visible" />
 
     <!-- Start screen -->
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView
         android:id="@+id/chimp_start"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
         android:layout_gravity="center"
-        android:background="@drawable/chimp_small_screen_background"
-        android:elevation="100dp"
-        android:visibility="visible">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chimp test"
-            android:layout_gravity="center"
-            android:textSize="26sp"
-            android:fontFamily="@font/rajdhani_semibold"
-            android:includeFontPadding="false"
-            android:textColor="@color/white"/>
-
-        <Button
-            android:id="@+id/chimp_start_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Start"
-            android:fontFamily="@font/rajdhani_regular"
-            android:includeFontPadding="false"
-            android:textSize="16sp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/chimp_background_dark"/>
-
-    </LinearLayout>
-
-
-    <!-- Mid-round screen -->
-
-    <LinearLayout
-        android:id="@+id/chimp_mid_round"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:background="@drawable/chimp_small_screen_background"
-        android:elevation="100dp"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Numbers"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:fontFamily="@font/rajdhani_regular"
-            android:textSize="22sp"/>
-
-        <TextView
-            android:id="@+id/chimp_mid_round_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4"
-            android:layout_gravity="center"
-            android:textSize="22sp"
-            android:fontFamily="@font/rajdhani_regular"
-            android:includeFontPadding="false"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Strikes"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:fontFamily="@font/rajdhani_regular"
-            android:includeFontPadding="false" />
-
-        <TextView
-            android:id="@+id/chimp_mid_round_strikes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="0 of 3"
-            android:textColor="@color/white"
-            android:fontFamily="@font/rajdhani_regular"
-            android:includeFontPadding="false"
-            android:textSize="22sp" />
-
-        <Button
-            android:id="@+id/chimp_mid_round_continue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Continue"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:fontFamily="@font/rajdhani_regular"/>
-
-    </LinearLayout>
-
-
-    <!-- Main game screen -->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/chimp_main"
-        android:padding="14dp"
-        android:visibility="visible">
-
-        <Button
-            android:id="@+id/chimp_test_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:textSize="16sp"
-            android:fontFamily="@font/rajdhani_regular"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/chimp_background_dark"
-            android:includeFontPadding="false"
-            android:layout_marginTop="10dp" />
+        android:elevation="8dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/chimp_background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:background="@drawable/chimp_small_screen_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:includeFontPadding="false"
+                android:text="Chimp test"
+                android:textColor="@color/chimp_text_primary"
+                android:textSize="26sp" />
+
+            <Button
+                android:id="@+id/chimp_start_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/chimp_main"
+                android:fontFamily="@font/rajdhani_regular"
+                android:includeFontPadding="false"
+                android:text="Start"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Mid-round screen -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/chimp_mid_round"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="8dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/chimp_background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chimp_small_screen_background"
+            android:elevation="100dp"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:text="Numbers"
+                android:textColor="@color/chimp_text_primary"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/chimp_mid_round_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:includeFontPadding="false"
+                android:text="4"
+                android:textColor="@color/chimp_text_primary"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:includeFontPadding="false"
+                android:text="Strikes"
+                android:textColor="@color/chimp_text_primary"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/chimp_mid_round_strikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:includeFontPadding="false"
+                android:text="0 of 3"
+                android:textColor="@color/chimp_text_primary"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/chimp_mid_round_continue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/chimp_main"
+                android:fontFamily="@font/rajdhani_regular"
+                android:text="Continue"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Main game screen -->
+    <LinearLayout
+        android:id="@+id/chimp_main_game_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/chimp_background"
+        android:orientation="vertical"
+        android:padding="14dp"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/chimp_game_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="Round 1"
+            android:fontFamily="@font/rajdhani_semibold"
+            android:includeFontPadding="false"
+            android:textColor="@color/chimp_text_primary"
+            android:textSize="28sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="@drawable/chimp_small_screen_background"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <GridLayout
                 android:id="@+id/chimp_test_grid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:alignmentMode="alignMargins"
                 android:columnCount="4"
                 android:rowCount="7"
-                android:useDefaultMargins="false"
-                android:alignmentMode="alignMargins"
-                android:layout_gravity="center"/>
+                android:useDefaultMargins="false" />
 
         </LinearLayout>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/chimp_game_menu_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/menu100"
+                app:tint="@color/chimp_border_soft"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
     <!-- Game over screen -->
-    
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/chimp_game_over"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:padding="10dp"
-        android:elevation="100dp"
-        android:background="@drawable/chimp_small_screen_background"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Game Over bozo!\nScore"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:fontFamily="@font/rajdhani_regular"
-            android:includeFontPadding="false"
-            android:textSize="22sp"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/chimp_game_over_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:fontFamily="@font/rajdhani_regular"
-            android:includeFontPadding="false"/>
+        android:elevation="8dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/chimp_background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center">
+            android:background="@drawable/chimp_small_screen_background"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-            <Button
-                android:id="@+id/chimp_game_over_back"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Back"
-                android:fontFamily="@font/rajdhani_regular"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:layout_marginEnd="16dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:gravity="center"
                 android:includeFontPadding="false"
-                android:layout_weight="1"/>
+                android:text="Game Over!\nScore"
+                android:textColor="@color/chimp_text_primary"
+                android:textSize="22sp" />
 
-            <Button
-                android:id="@+id/chimp_game_over_restart"
+            <TextView
+                android:id="@+id/chimp_game_over_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Restart"
-                android:fontFamily="@font/rajdhani_regular"
-                android:textColor="@color/white"
-                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
                 android:includeFontPadding="false"
-                android:layout_weight="0.7"/>
+                android:text="4"
+                android:textColor="@color/chimp_text_primary"
+                android:textSize="22sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/chimp_game_over_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rajdhani_regular"
+                    android:includeFontPadding="false"
+                    android:text="Back"
+                    android:backgroundTint="@color/chimp_main"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/chimp_game_over_restart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:fontFamily="@font/rajdhani_regular"
+                    android:includeFontPadding="false"
+                    android:backgroundTint="@color/chimp_main"
+                    android:text="Restart"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
+    <!-- Game menu -->
+    <LinearLayout
+        android:id="@+id/chimp_game_menu"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/chimp_game_menu_background"
+        android:elevation="100dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="14dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/chimp_game_menu_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_weight="0.3"
+            android:src="@drawable/back_thin100"
+            app:tint="@color/chimp_border_soft" />
+
+        <ImageView
+            android:id="@+id/chimp_game_menu_play"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_weight="0.3"
+            android:src="@drawable/play_outline100"
+            app:tint="@color/chimp_border_soft"/>
+
+        <ImageView
+            android:id="@+id/chimp_game_menu_retry"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_weight="0.3"
+            android:src="@drawable/retry100"
+            app:tint="@color/chimp_border_soft"/>
     </LinearLayout>
 </FrameLayout>

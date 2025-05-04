@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         gameItemList.add(new GameItem("Letter Memory", R.drawable.wordbook_white100, getResources().getColor(R.color.green), "Placeholder3", LetterGameActivity.class));
         gameItemList.add(new GameItem("Sequence Memory", R.drawable.grid_white100, getResources().getColor(R.color.sequence_main), "Placeholder4", SequenceMemoryGameActivity.class));
         gameItemList.add(new GameItem("Chimp Game", R.drawable.monkey_white100, getResources().getColor(R.color.chimp_main), "Placeholder5", ChimpTestActivity.class));
-        gameItemList.add(new GameItem("Typing Game", R.drawable.keyboard_white100, getResources().getColor(R.color.type_main), "Placeholder6", TypingGame.class));
+        gameItemList.add(new GameItem("Typing Game", R.drawable.keyboard_white100, getResources().getColor(R.color.type_main), "This is a simple test of typing speed, measuring words per minute, or WPM.", TypingGame.class));
 
         //set adapter
         tileAdapter = new TileAdapter(gameItemList);
