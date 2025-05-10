@@ -46,4 +46,11 @@
     <color name="type_light_text">#FFF3F0</color>
     <color name="type_border_soft">#F5A99E</color>
 
+    <!-- Stats screen -->
+    <color name="stats_background">#FAFAFA</color>
+    <color name="stats_card_background">#FFFFFF</color>
+    <color name="stats_border_soft">#E0E0E0</color>
+    <color name="stats_text_primary">#2E2E2E</color>
+    <color name="stats_accent">#BDC6D3</color>
+
 </resources>

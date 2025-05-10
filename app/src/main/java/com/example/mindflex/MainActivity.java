@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -15,13 +14,13 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mindflex.database.ScoreInitialize;
 import com.example.mindflex.game.activites.ChimpTestActivity;
 import com.example.mindflex.game.activites.LetterGameActivity;
 import com.example.mindflex.game.activites.NumberGameActivity;
@@ -55,8 +54,11 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        //fix screen space
+        // fix screen space
         View rootView = findViewById(android.R.id.content);
+
+        // set default score values
+        ScoreInitialize.initializeScores(this);
 
         // for now bottom and top part of the screen space will be limited
         rootView.setOnApplyWindowInsetsListener((v, insets) -> {
@@ -69,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         // prepare recycler view
         recyclerView = findViewById(R.id.tile_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         //prepare game data and add games
         gameItemList = new ArrayList<>();
@@ -98,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         drawerMenuButton = findViewById(R.id.menu_button);
-
-
         navigationView.setBackgroundColor(getResources().getColor(R.color.white));
         navigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.black)));
         navigationView.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {}
 
             @Override
-            public void onDrawerOpened(View drawerView) {
+            public void onDrawerOpened(@NonNull View drawerView) {
                 drawerBackButton = navigationView.findViewById(R.id.drawer_back_button);
                 drawerBackButton.setOnClickListener(v->{
                     drawerLayout.closeDrawer(GravityCompat.START);

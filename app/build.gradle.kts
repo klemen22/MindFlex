@@ -37,7 +37,7 @@ android {
 }
 
 dependencies {
-
+    val room_version = "2.7.1"
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -57,5 +57,14 @@ dependencies {
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
     implementation(libs.transition)
-
+    implementation("androidx.datastore:datastore-preferences:1.1.5")
+    implementation("androidx.datastore:datastore-preferences-rxjava2:1.1.5")
+    implementation("androidx.datastore:datastore-preferences-rxjava3:1.1.5")
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-rxjava2:$room_version")
+    implementation("androidx.room:room-rxjava3:$room_version")
+    implementation("androidx.room:room-guava:$room_version")
+    testImplementation("androidx.room:room-testing:$room_version")
+    implementation("androidx.room:room-paging:$room_version")
 }

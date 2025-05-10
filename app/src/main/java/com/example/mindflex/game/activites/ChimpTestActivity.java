@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.mindflex.R;
+import com.example.mindflex.database.HighScoreManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,6 +45,7 @@ public class ChimpTestActivity extends AppCompatActivity {
 
     private int strikes = 3;
     private int round = 0;
+    private int highScore = 0;
     private int index = 1;
     private int rowsNum = 7;
     private int colsNum = 4;
@@ -107,6 +109,15 @@ public class ChimpTestActivity extends AppCompatActivity {
         chimpGameMenuRestart = findViewById(R.id.chimp_game_menu_retry);
         chimpGameMenuPlay = findViewById(R.id.chimp_game_menu_play);
 
+        // get highscore
+        HighScoreManager.getHighScore(this, "Chimp Game", new HighScoreManager.HighScoreCallback() {
+            @Override
+            public void onResult(int score) {
+                runOnUiThread(()->{
+                    highScore = score;
+                });
+            }
+        });
 
         chimpStartButton.setOnClickListener(v -> {
             strikes = 3;
@@ -233,7 +244,6 @@ public class ChimpTestActivity extends AppCompatActivity {
                 if (tile.number == index) {
                     if (tile.number == 1) {
                         tile.view.setVisibility(View.INVISIBLE);
-
                         // hide numbers of other tiles
                         for (int i = 1; i < tilesNum; i++) {
                             Tile tileTemp = tilesList.get(i);
@@ -282,6 +292,11 @@ public class ChimpTestActivity extends AppCompatActivity {
         input = false;
         fadeIn(chimpGameOver, 300);
         fadeIn(chimpOverlay, 300);
+
+        if (round + 4 > highScore){
+            highScore = round + 4 ;
+            HighScoreManager.insertHighScore(this,"Chimp Game", highScore);
+        }
 
         chimpGameOverScore.setText(String.valueOf(score));
 

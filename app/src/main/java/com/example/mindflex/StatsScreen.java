@@ -8,8 +8,26 @@ import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mindflex.database.AppDatabase;
+import com.example.mindflex.database.HighScore;
+import com.example.mindflex.database.HighScoreDao;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class StatsScreen extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private List<ScoreItem> scoreItemList = new ArrayList<>();
+    private ScoreAdapter scoreAdapter;
+
+    private static final String[] game_ids = {"Chimp Game", "Letter Game", "Number Mame",
+                                              "Reaction Game", "Sequence Game", "Typing Game"};
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -33,6 +51,36 @@ public class StatsScreen extends AppCompatActivity {
 
         backbutton.setOnClickListener(v -> {
             onBackPressed();
+        });
+
+        recyclerView = findViewById(R.id.scores_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        scoreAdapter = new ScoreAdapter(scoreItemList);
+        recyclerView.setAdapter(scoreAdapter);
+        loadData();
+    }
+
+    public void loadData(){
+        executorService.execute(()->{
+            AppDatabase appDatabase = AppDatabase.getInstance(this);
+            HighScoreDao highScoreDao = appDatabase.highScoreDao();
+
+            List<ScoreItem> loadedScores = new ArrayList<>();
+
+            for(String gameID : game_ids){
+                HighScore highScore = highScoreDao.getScore(gameID);
+                int score = 0;
+                if (highScore != null){
+                    score = highScore.score;
+                }
+                loadedScores.add(new ScoreItem(gameID, score));
+            }
+
+            runOnUiThread(()->{
+                scoreItemList.clear();
+                scoreItemList.addAll(loadedScores);
+                scoreAdapter.notifyDataSetChanged();
+            });
         });
     }
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -65,19 +66,12 @@ public class TileAdapter extends RecyclerView.Adapter<TileAdapter.TileViewHolder
         if (!isExpanded) {
             holder.expanded_layout.setVisibility(View.GONE);
             holder.tile_layout_middle.setGravity(Gravity.CENTER);
-
-
         } else {
             holder.expanded_layout.setVisibility(View.VISIBLE);
             holder.tile_layout_middle.setGravity(Gravity.START);
-
         }
 
-
         holder.itemView.setOnClickListener(v -> {
-
-
-
             if (isExpanded) {
                 expandedPosition = -1; // Collapse
                 notifyItemChanged(position);
@@ -86,6 +80,10 @@ public class TileAdapter extends RecyclerView.Adapter<TileAdapter.TileViewHolder
                 expandedPosition = position; // Expand
                 notifyItemChanged(prevExpandedPosition);
                 notifyItemChanged(expandedPosition);
+
+                ViewParent parent = holder.itemView.getParent();
+                RecyclerView recyclerView = (RecyclerView) holder.itemView.getParent();
+                recyclerView.post(() -> recyclerView.smoothScrollToPosition(position));
             }
 
         });

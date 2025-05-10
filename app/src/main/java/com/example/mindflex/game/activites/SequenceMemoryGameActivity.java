@@ -3,6 +3,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -16,8 +17,13 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import com.example.mindflex.R;
+import com.example.mindflex.database.HighScoreManager;
+
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SequenceMemoryGameActivity extends AppCompatActivity {
 
@@ -26,6 +32,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
     private List<View> tiles = new ArrayList<>();
     private int tileSize = 240;
     private int round = 0;
+    private int highScore = 0;
 
     private List<Integer> tilesSequence = new ArrayList<>();
     private int currentIndex = 0;
@@ -45,6 +52,8 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
     private ImageView sequenceMenuRestart;
     private ImageView sequenceMenuButton;
 
+    private static final ExecutorService executorService = Executors.newSingleThreadExecutor();
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -53,6 +62,18 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sequence_memory_game);
+
+        // get highscore
+        HighScoreManager.getHighScore(this, "Sequence Game", new HighScoreManager.HighScoreCallback() {
+            @Override
+            public void onResult(int score) {
+                runOnUiThread(()->{
+                    highScore = score;
+                    Log.d("highscore", "Highscore: " + highScore);
+                });
+            }
+        });
+
 
         //fix screen space
         View rootView = findViewById(android.R.id.content);
@@ -168,6 +189,12 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
                     input = false;
                     gameOverScreen.setVisibility(View.VISIBLE);
                     overlay.setVisibility(View.VISIBLE);
+
+
+                    if (round > highScore){
+                        HighScoreManager.insertHighScore(this, "Sequence Game", round);
+                    }
+
                     retryButton.setOnClickListener(v1 -> {
                         for(View tile1 : tiles){
                             tile1.setBackgroundResource(R.drawable.sequence_tile_background);

@@ -11,7 +11,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +25,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.mindflex.R;
+import com.example.mindflex.database.HighScoreManager;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,6 +65,8 @@ public class TypingGame extends AppCompatActivity {
     private int wpm = 0;
     private int wordCount = 0;
     private int roundNum = 0;
+    private int highScore = 0;
+    private int currentScore = 0;
 
 
 
@@ -103,6 +106,16 @@ public class TypingGame extends AppCompatActivity {
         typeGameMenuBackButton = findViewById(R.id.type_game_menu_back_button);
         typeGameMenuPlayButton = findViewById(R.id.type_game_menu_play_button);
         typeGameMenuRestartButton = findViewById(R.id.type_game_menu_retry_button);
+
+        // get highscore
+        HighScoreManager.getHighScore(this, "Typing Game", new HighScoreManager.HighScoreCallback() {
+            @Override
+            public void onResult(int score) {
+                runOnUiThread(()->{
+                    highScore = score;
+                });
+            }
+        });
         
         // load sentences
         sentences = loadSentences("sentences1.txt");
@@ -193,6 +206,7 @@ public class TypingGame extends AppCompatActivity {
             @Override
             public void run() {
                 if (timerRunning) {
+                    // TODO: fix WPM counter value jumping up at the start of the sentence :(
                     long millis = System.currentTimeMillis() - startTime - totalPauseTime;
                     int seconds = (int) (millis / 1000);
                     int minutes = seconds / 60;
@@ -200,6 +214,9 @@ public class TypingGame extends AppCompatActivity {
                     typeTime.setText(String.format("Time: %02d:%02d", minutes, seconds));
                     wordCount = typeInput.getText().toString().split("\\s+").length;
                     wpm = (int) (wordCount / (millis / 60000.0));
+                    if (wpm > currentScore && millis > 2000){
+                        currentScore = wpm;
+                    }
                     if (millis > 2000) {
                         typeWPM.setText(String.format("WPM: %d", wpm));
                     } else {
@@ -213,8 +230,13 @@ public class TypingGame extends AppCompatActivity {
 
     private void startRound() {
         if (sentences.isEmpty()) {
-            Toast.makeText(this, "Sentences are not aviable", LENGTH_SHORT).show();
+            Toast.makeText(this, "Sentences are not available", LENGTH_SHORT).show();
             return;
+        }
+        if (currentScore > highScore){
+            highScore = currentScore;
+            currentScore = 0;
+            HighScoreManager.insertHighScore(this, "Typing Game", highScore);
         }
         roundNum++;
         typeRound.setText("Round: " + roundNum);
