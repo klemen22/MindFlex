@@ -31,9 +31,6 @@
             android:name=".game.activites.NumberGameActivity"
             android:exported="false" />
         <activity
-            android:name=".TileDialogFragment"
-            android:exported="false" />
-        <activity
             android:name=".game.activites.ReactionGameActivity"
             android:exported="false"
             android:label="@string/title_activity_reaction_game"

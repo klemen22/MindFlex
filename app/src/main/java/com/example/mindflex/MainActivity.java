@@ -46,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView drawerBackButton;
 
+    // game descriptions
+    String sequenceMemoryDesc = "Memorize the sequence of buttons that light up, then press them in order.\n\nEvery time you finish the pattern, it gets longer.";
+    String chimpGameDesc = "This is a test of working memory, that gets increasingly difficult every turn, starting at 4 digits, and adding one every turn.\n\nIf you pass a level, the number increases. If you fail, you get a strike. Three strikes and the test is over.";
+    String typingGameDesc = "This is a simple test of typing speed, measuring words per minute, or WPM.";
+
     @SuppressLint("MissingInflatedId")
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -74,12 +79,12 @@ public class MainActivity extends AppCompatActivity {
 
         //prepare game data and add games
         gameItemList = new ArrayList<>();
-        gameItemList.add(new GameItem("Reaction Time", R.drawable.lightning_bolt_white100, getResources().getColor(R.color.red), "Placeholder1", ReactionGameActivity.class));
-        gameItemList.add(new GameItem("Number Memory", R.drawable.numbers_white100, getResources().getColor(R.color.orange), "Placeholder2", NumberGameActivity.class));
-        gameItemList.add(new GameItem("Letter Memory", R.drawable.wordbook_white100, getResources().getColor(R.color.green), "Placeholder3", LetterGameActivity.class));
-        gameItemList.add(new GameItem("Sequence Memory", R.drawable.grid_white100, getResources().getColor(R.color.sequence_main), "Placeholder4", SequenceMemoryGameActivity.class));
-        gameItemList.add(new GameItem("Chimp Game", R.drawable.monkey_white100, getResources().getColor(R.color.chimp_main), "Placeholder5", ChimpTestActivity.class));
-        gameItemList.add(new GameItem("Typing Game", R.drawable.keyboard_white100, getResources().getColor(R.color.type_main), "This is a simple test of typing speed, measuring words per minute, or WPM.", TypingGame.class));
+        gameItemList.add(new GameItem("Reaction Time", R.drawable.lightning_bolt_white100, getResources().getColor(R.color.red), getResources().getColor(R.color.black),"Placeholder1", ReactionGameActivity.class));
+        gameItemList.add(new GameItem("Number Memory", R.drawable.numbers_white100, getResources().getColor(R.color.orange), getResources().getColor(R.color.black), "Placeholder2", NumberGameActivity.class));
+        gameItemList.add(new GameItem("Letter Memory", R.drawable.wordbook_white100, getResources().getColor(R.color.green), getResources().getColor(R.color.black),"Placeholder3", LetterGameActivity.class));
+        gameItemList.add(new GameItem("Sequence Memory", R.drawable.grid_white100, getResources().getColor(R.color.sequence_main), getResources().getColor(R.color.sequence_background_dark), sequenceMemoryDesc, SequenceMemoryGameActivity.class));
+        gameItemList.add(new GameItem("Chimp Game", R.drawable.monkey_white100, getResources().getColor(R.color.chimp_main), getResources().getColor(R.color.chimp_background_dark),chimpGameDesc, ChimpTestActivity.class));
+        gameItemList.add(new GameItem("Typing Game", R.drawable.keyboard_white100, getResources().getColor(R.color.type_main), getResources().getColor(R.color.type_background_dark),typingGameDesc, TypingGame.class));
 
         //set adapter
         tileAdapter = new TileAdapter(gameItemList);

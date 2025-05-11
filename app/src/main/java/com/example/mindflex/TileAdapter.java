@@ -57,6 +57,11 @@ public class TileAdapter extends RecyclerView.Adapter<TileAdapter.TileViewHolder
             backgroundDrawable.setTint(current_game.getBackgroundColor());
         }
 
+        // chnage button background color
+        if (current_game.getButtonBackgroundColor() != 0) {
+            holder.play_button.setBackgroundColor(current_game.getButtonBackgroundColor());
+        }
+
         holder.itemView.setBackground(backgroundDrawable);
 
         // logic for expanding or collapsing the tile

@@ -17,7 +17,7 @@
     <!-- Sequence memory game colors -->
     <color name="sequence_main">#5A9BD8</color>
     <color name="sequence_background">#DDEAF6</color>
-    <color name="sequence_background_dark">#D6E8F5</color>
+    <color name="sequence_background_dark">#2F73B5</color>
     <color name="sequence_highlight">#B3D9FF</color>
     <color name="sequence_highlight_dark">#80C1FF</color>
     <color name="sequence_success">#5FD87B</color>

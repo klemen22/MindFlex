@@ -2,20 +2,23 @@ package com.example.mindflex;
 
 public class GameItem {
 
+
     private String title;
     private String description;
     private int image_resource;
     private int backgroundColor;
+    private int buttonBackgroundColor;
 
     private Class<?> targetActivity;
 
 
-    public GameItem(String title, int image_resource, int backgroundColor, String description, Class<?> targetActivity) {
+    public GameItem(String title, int image_resource, int backgroundColor, int buttonBackgroundColor, String description, Class<?> targetActivity) {
         this.title = title;
         this.image_resource = image_resource;
         this.backgroundColor = backgroundColor;
         this.description = description;
         this.targetActivity = targetActivity;
+        this.buttonBackgroundColor = buttonBackgroundColor;
     }
 
     public String getTitle(){
@@ -28,6 +31,10 @@ public class GameItem {
 
     public int getBackgroundColor(){
         return backgroundColor;
+    }
+
+    public int getButtonBackgroundColor(){
+        return buttonBackgroundColor;
     }
 
     public String getDescription(){

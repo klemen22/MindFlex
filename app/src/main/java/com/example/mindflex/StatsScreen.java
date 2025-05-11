@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
@@ -47,7 +48,7 @@ public class StatsScreen extends AppCompatActivity {
             return insets;
         });
 
-        Button backbutton = findViewById(R.id.back_button);
+        ImageView backbutton = findViewById(R.id.stats_back_button);
 
         backbutton.setOnClickListener(v -> {
             onBackPressed();
