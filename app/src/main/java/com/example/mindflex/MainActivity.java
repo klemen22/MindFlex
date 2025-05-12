@@ -26,7 +26,7 @@ import com.example.mindflex.game.activites.LetterGameActivity;
 import com.example.mindflex.game.activites.NumberGameActivity;
 import com.example.mindflex.game.activites.ReactionGameActivity;
 import com.example.mindflex.game.activites.SequenceMemoryGameActivity;
-import com.example.mindflex.game.activites.TypingGame;
+import com.example.mindflex.game.activites.TypingGameActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -77,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.tile_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //prepare game data and add games
+        // prepare game data and add games
         gameItemList = new ArrayList<>();
         gameItemList.add(new GameItem("Reaction Time", R.drawable.lightning_bolt_white100, getResources().getColor(R.color.red), getResources().getColor(R.color.black),"Placeholder1", ReactionGameActivity.class));
         gameItemList.add(new GameItem("Number Memory", R.drawable.numbers_white100, getResources().getColor(R.color.orange), getResources().getColor(R.color.black), "Placeholder2", NumberGameActivity.class));
         gameItemList.add(new GameItem("Letter Memory", R.drawable.wordbook_white100, getResources().getColor(R.color.green), getResources().getColor(R.color.black),"Placeholder3", LetterGameActivity.class));
         gameItemList.add(new GameItem("Sequence Memory", R.drawable.grid_white100, getResources().getColor(R.color.sequence_main), getResources().getColor(R.color.sequence_background_dark), sequenceMemoryDesc, SequenceMemoryGameActivity.class));
         gameItemList.add(new GameItem("Chimp Game", R.drawable.monkey_white100, getResources().getColor(R.color.chimp_main), getResources().getColor(R.color.chimp_background_dark),chimpGameDesc, ChimpTestActivity.class));
-        gameItemList.add(new GameItem("Typing Game", R.drawable.keyboard_white100, getResources().getColor(R.color.type_main), getResources().getColor(R.color.type_background_dark),typingGameDesc, TypingGame.class));
+        gameItemList.add(new GameItem("Typing Game", R.drawable.keyboard_white100, getResources().getColor(R.color.type_main), getResources().getColor(R.color.type_background_dark),typingGameDesc, TypingGameActivity.class));
 
         //set adapter
         tileAdapter = new TileAdapter(gameItemList);

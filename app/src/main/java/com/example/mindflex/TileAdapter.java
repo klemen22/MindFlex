@@ -1,4 +1,5 @@
 package com.example.mindflex;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +28,7 @@ public class TileAdapter extends RecyclerView.Adapter<TileAdapter.TileViewHolder
     private List<GameItem> game_list;
     private int expandedPosition = -1;
 
-    public TileAdapter(List<GameItem> game_list){
+    public TileAdapter(List<GameItem> game_list) {
         this.game_list = game_list;
     }
 
@@ -85,8 +86,6 @@ public class TileAdapter extends RecyclerView.Adapter<TileAdapter.TileViewHolder
                 expandedPosition = position; // Expand
                 notifyItemChanged(prevExpandedPosition);
                 notifyItemChanged(expandedPosition);
-
-                ViewParent parent = holder.itemView.getParent();
                 RecyclerView recyclerView = (RecyclerView) holder.itemView.getParent();
                 recyclerView.post(() -> recyclerView.smoothScrollToPosition(position));
             }

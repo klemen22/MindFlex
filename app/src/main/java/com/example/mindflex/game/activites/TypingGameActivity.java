@@ -34,7 +34,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TypingGame extends AppCompatActivity {
+public class TypingGameActivity extends AppCompatActivity {
 
     private View typeOverlay;
     private Button typeStartButton;
