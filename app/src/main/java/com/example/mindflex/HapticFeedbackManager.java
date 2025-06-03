@@ -1,0 +1,30 @@
+package com.example.mindflex;
+
+import android.view.HapticFeedbackConstants;
+import android.view.View;
+
+public class HapticFeedbackManager {
+
+    private static boolean HapticEnabled = true;
+
+    public static void EnableHapticFeedback(boolean hapticEnabled){
+        HapticEnabled = hapticEnabled;
+    }
+
+    public static boolean CheckHapticFeedback (){
+        return HapticEnabled;
+    }
+
+    public static void HapticFeedbackLight(View view){
+        if(HapticEnabled && view != null){
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+        }
+    }
+
+    public static void HapticFeedbackStrong(View view){
+        if(HapticEnabled && view != null){
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
+        }
+    }
+
+}

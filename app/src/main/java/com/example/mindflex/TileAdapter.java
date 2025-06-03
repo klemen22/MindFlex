@@ -107,6 +107,7 @@ public class TileAdapter extends RecyclerView.Adapter<TileAdapter.TileViewHolder
 
 
         holder.play_button.setOnClickListener(v -> {
+            HapticFeedbackManager.HapticFeedbackLight(v);
             Context context = holder.itemView.getContext();
             Intent intent = new Intent(context, current_game.getTargetActivity());
             context.startActivity(intent);

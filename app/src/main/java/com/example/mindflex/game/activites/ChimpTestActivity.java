@@ -1,7 +1,9 @@
 package com.example.mindflex.game.activites;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -15,7 +17,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.mindflex.HapticFeedbackManager;
 import com.example.mindflex.R;
+import com.example.mindflex.database.DailyActivityManager;
 import com.example.mindflex.database.HighScoreManager;
 
 import java.util.ArrayList;
@@ -53,7 +57,6 @@ public class ChimpTestActivity extends AppCompatActivity {
     private boolean input = false;
     private boolean gameFlag = false;
     private ArrayList<Tile> tilesList = new ArrayList<>();
-
 
 
     private class Tile {
@@ -113,13 +116,14 @@ public class ChimpTestActivity extends AppCompatActivity {
         HighScoreManager.getHighScore(this, "Chimp Game", new HighScoreManager.HighScoreCallback() {
             @Override
             public void onResult(int score) {
-                runOnUiThread(()->{
+                runOnUiThread(() -> {
                     highScore = score;
                 });
             }
         });
 
         chimpStartButton.setOnClickListener(v -> {
+            HapticFeedbackManager.HapticFeedbackLight(v);
             strikes = 3;
             round = 0;
             gameFlag = true;
@@ -134,31 +138,35 @@ public class ChimpTestActivity extends AppCompatActivity {
             if (!gameFlag) {
                 return;
             }
+            HapticFeedbackManager.HapticFeedbackLight(v);
             input = false;
-            chimpOverlay.animate().alpha(1f).setDuration(300).withEndAction(()->chimpOverlay.setVisibility(View.VISIBLE)).start();
-            chimpMenuButton.animate().alpha(0f).setDuration(200).withEndAction(()->chimpMenuButton.setVisibility(View.GONE)).start();
+            chimpOverlay.animate().alpha(1f).setDuration(300).withEndAction(() -> chimpOverlay.setVisibility(View.VISIBLE)).start();
+            chimpMenuButton.animate().alpha(0f).setDuration(200).withEndAction(() -> chimpMenuButton.setVisibility(View.GONE)).start();
             chimpGameMenu.setVisibility(View.VISIBLE);
             chimpGameMenu.setTranslationY(chimpGameMenu.getHeight());
             chimpMain.animate().translationY(-80).setDuration(300).start();
             chimpGameMenu.animate().translationY(0).setDuration(300).start();
 
-            chimpGameMenuBack.setOnClickListener(vv->{
+            chimpGameMenuBack.setOnClickListener(vv -> {
+                HapticFeedbackManager.HapticFeedbackLight(vv);
                 onBackPressed();
             });
 
-            chimpGameMenuPlay.setOnClickListener(vv->{
-               input = true;
-               chimpOverlay.animate().alpha(0f).setDuration(300).withEndAction(()->chimpGameMenu.setVisibility(View.GONE)).start();
-               chimpMenuButton.animate().alpha(1f).setDuration(200).withEndAction(()->chimpMenuButton.setVisibility(View.VISIBLE)).start();
-               chimpMain.animate().translationY(0).setDuration(300).start();
-               chimpGameMenu.animate().translationY(chimpGameMenu.getHeight()).setDuration(300).withEndAction(()->chimpGameMenu.setVisibility(View.GONE)).start();
+            chimpGameMenuPlay.setOnClickListener(vv -> {
+                HapticFeedbackManager.HapticFeedbackLight(vv);
+                input = true;
+                chimpOverlay.animate().alpha(0f).setDuration(300).withEndAction(() -> chimpGameMenu.setVisibility(View.GONE)).start();
+                chimpMenuButton.animate().alpha(1f).setDuration(200).withEndAction(() -> chimpMenuButton.setVisibility(View.VISIBLE)).start();
+                chimpMain.animate().translationY(0).setDuration(300).start();
+                chimpGameMenu.animate().translationY(chimpGameMenu.getHeight()).setDuration(300).withEndAction(() -> chimpGameMenu.setVisibility(View.GONE)).start();
             });
 
-            chimpGameMenuRestart.setOnClickListener(vv->{
-                chimpOverlay.animate().alpha(0f).setDuration(300).withEndAction(()->chimpGameMenu.setVisibility(View.GONE)).start();
-                chimpMenuButton.animate().alpha(1f).setDuration(200).withEndAction(()->chimpMenuButton.setVisibility(View.VISIBLE)).start();
+            chimpGameMenuRestart.setOnClickListener(vv -> {
+                HapticFeedbackManager.HapticFeedbackLight(vv);
+                chimpOverlay.animate().alpha(0f).setDuration(300).withEndAction(() -> chimpGameMenu.setVisibility(View.GONE)).start();
+                chimpMenuButton.animate().alpha(1f).setDuration(200).withEndAction(() -> chimpMenuButton.setVisibility(View.VISIBLE)).start();
                 chimpMain.animate().translationY(0).setDuration(300).start();
-                chimpGameMenu.animate().translationY(chimpGameMenu.getHeight()).setDuration(300).withEndAction(()->chimpGameMenu.setVisibility(View.GONE)).start();
+                chimpGameMenu.animate().translationY(chimpGameMenu.getHeight()).setDuration(300).withEndAction(() -> chimpGameMenu.setVisibility(View.GONE)).start();
                 round = 0;
                 strikes = 3;
                 Toast.makeText(this, "Restarting...", Toast.LENGTH_SHORT).show();
@@ -233,20 +241,17 @@ public class ChimpTestActivity extends AppCompatActivity {
 
     private void tileGuessing(int tilesNum) {
 
-        for (Tile tile : tilesList) {
+        for (int i = 0; i < tilesNum; i++) {
+            Tile tile = tilesList.get(i);
             tile.view.setOnClickListener(v -> {
+                if (!input) return;
+                HapticFeedbackManager.HapticFeedbackStrong(v);
 
-                if (!input) {
-                    return;
-                }
-
-                // check if the right tile was clicked
                 if (tile.number == index) {
                     if (tile.number == 1) {
                         tile.view.setVisibility(View.INVISIBLE);
-                        // hide numbers of other tiles
-                        for (int i = 1; i < tilesNum; i++) {
-                            Tile tileTemp = tilesList.get(i);
+                        for (int j = 1; j < tilesNum; j++) {
+                            Tile tileTemp = tilesList.get(j);
                             ((TextView) tileTemp.view).setText("");
                             tileTemp.view.setBackgroundResource(R.drawable.chimp_test_tile_background_highlight);
                             tileTemp.view.setVisibility(View.VISIBLE);
@@ -254,7 +259,7 @@ public class ChimpTestActivity extends AppCompatActivity {
                     } else {
                         fadeOut(tile.view, 150);
                     }
-                    index = index + 1;
+                    index++;
                     if (index == tilesNum + 1) {
                         round++;
                         MidRound(round + 1);
@@ -269,6 +274,7 @@ public class ChimpTestActivity extends AppCompatActivity {
                 }
             });
         }
+
     }
 
     private void MidRound(int tileNum) {
@@ -281,9 +287,10 @@ public class ChimpTestActivity extends AppCompatActivity {
         chimpMidRoundStrike.setText(strikes + " of 3");
 
         chimpMidRoundContinue.setOnClickListener(v -> {
+            HapticFeedbackManager.HapticFeedbackLight(v);
             fadeOut(chimpMidRound, 300);
             fadeOut(chimpOverlay, 300);
-            rootView.postDelayed(this::startRound,150);
+            rootView.postDelayed(this::startRound, 150);
         });
     }
 
@@ -293,18 +300,24 @@ public class ChimpTestActivity extends AppCompatActivity {
         fadeIn(chimpGameOver, 300);
         fadeIn(chimpOverlay, 300);
 
-        if (round + 4 > highScore){
-            highScore = round + 4 ;
-            HighScoreManager.insertHighScore(this,"Chimp Game", highScore);
+        // save highscore
+        if (round + 4 > highScore) {
+            highScore = round + 4;
+            HighScoreManager.insertHighScore(this, "Chimp Game", highScore);
         }
+
+        // record played game
+        DailyActivityManager.RecordGame(this, "Chimp Game");
 
         chimpGameOverScore.setText(String.valueOf(score));
 
         chimpGameOverBack.setOnClickListener(v -> {
+            HapticFeedbackManager.HapticFeedbackLight(v);
             onBackPressed();
         });
 
         chimpGameOverRestart.setOnClickListener(v -> {
+            HapticFeedbackManager.HapticFeedbackLight(v);
             fadeOut(chimpGameOver, 300);
             fadeOut(chimpOverlay, 300);
             strikes = 3;
@@ -313,16 +326,14 @@ public class ChimpTestActivity extends AppCompatActivity {
         });
     }
 
-    // testing object animator
 
     private void fadeIn(View view, int duration) {
-        view.animate().alpha(1f).setDuration(duration).withEndAction(()->view.setVisibility(View.VISIBLE)).start();
+        view.animate().alpha(1f).setDuration(duration).withEndAction(() -> view.setVisibility(View.VISIBLE)).start();
     }
 
     private void fadeOut(View view, int duration) {
         view.animate().alpha(0f).setDuration(duration).withEndAction(() -> view.setVisibility(View.GONE)).start();
     }
-
 
 
 }

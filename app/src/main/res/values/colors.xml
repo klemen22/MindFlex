@@ -53,4 +53,19 @@
     <color name="stats_text_primary">#2E2E2E</color>
     <color name="stats_accent">#BDC6D3</color>
 
+    <!-- Settings screen -->
+    <color name="settings_main">#FF7EB9</color>
+    <color name="settings_background">#FFE3F0</color>
+    <color name="settings_background_dark">#D35D91</color>
+    <color name="settings_highlight">#FFB3D6</color>
+    <color name="settings_highlight_dark">#E96DA5</color>
+    <color name="settings_text_primary">#2E2E2E</color>
+    <color name="settings_light_text">#FFF0F7</color>
+    <color name="settings_border_soft">#FF9AC8</color>
+    <color name="slider_inactive">#EEEEEE</color>
+    <color name="slider_gradient_start">#D44DFF</color>
+    <color name="slider_gradient_end">#00CFFF</color>
+    <color name="slider_halo1">#88D44DFF</color>
+    <color name="slider_halo2">#55A3FFFF</color>
+
 </resources>

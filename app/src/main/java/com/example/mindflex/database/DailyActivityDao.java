@@ -30,4 +30,7 @@ public interface DailyActivityDao {
     @Query("SELECT * FROM DailyActivity ORDER BY date ASC")
     List<DailyActivity> getAllActivities();
 
+    // delete all entries (for resetting table)
+    @Query("DELETE FROM DailyActivity")
+    void deleteAllActivityEntries();
 }

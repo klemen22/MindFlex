@@ -3,17 +3,17 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/drawer_home"
-            android:icon="@drawable/ic_android_black_24dp"
+            android:icon="@drawable/home_color100"
             android:title="Home" />
 
         <item
             android:id="@+id/drawer_settings"
-            android:icon="@drawable/ic_android_black_24dp"
+            android:icon="@drawable/cog_color100"
             android:title="Settings" />
 
         <item
             android:id="@+id/drawer_about"
-            android:icon="@drawable/ic_android_black_24dp"
+            android:icon="@drawable/questionmark_color100"
             android:title="About" />
     </group>
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -16,7 +17,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+
+import com.example.mindflex.HapticFeedbackManager;
 import com.example.mindflex.R;
+import com.example.mindflex.database.DailyActivityManager;
 import com.example.mindflex.database.HighScoreManager;
 
 
@@ -51,10 +55,6 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
     private ImageView sequenceMenuPlay;
     private ImageView sequenceMenuRestart;
     private ImageView sequenceMenuButton;
-
-    private static final ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -105,6 +105,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
         sequenceMenuButton = findViewById(R.id.sequence_game_menu_button);
 
         startButton.setOnClickListener(v -> {
+            HapticFeedbackManager.HapticFeedbackLight(v);
             startScreen.setVisibility(View.GONE);
             gameOverScreen.setVisibility(View.GONE);
             overlay.setVisibility(View.GONE);
@@ -119,6 +120,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
                 return;
             }
             input = false;
+            HapticFeedbackManager.HapticFeedbackLight(v);
 
             overlay.animate().alpha(1f).setDuration(250).withEndAction(()->overlay.setVisibility(View.VISIBLE)).start();
             sequenceMenuButton.animate().alpha(0f).setDuration(200).withEndAction(()->sequenceMenuButton.setVisibility(View.GONE)).start();
@@ -128,10 +130,12 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             sequenceMenu.animate().translationY(0).setDuration(400).start(); 
 
             sequenceMenuBack.setOnClickListener(vv->{
+                HapticFeedbackManager.HapticFeedbackLight(vv);
                 onBackPressed();
             });
 
             sequenceMenuPlay.setOnClickListener(vv->{
+                HapticFeedbackManager.HapticFeedbackLight(vv);
                 input = true;
                 overlay.animate().alpha(0f).setDuration(250).withEndAction(()->overlay.setVisibility(View.GONE)).start();
                 sequenceMenuButton.animate().alpha(1f).setDuration(200).withEndAction(()->sequenceMenuButton.setVisibility(View.VISIBLE)).start();
@@ -140,6 +144,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             });
 
             sequenceMenuRestart.setOnClickListener(vv->{
+                HapticFeedbackManager.HapticFeedbackLight(vv);
                 Toast.makeText(this, "Restarting...", Toast.LENGTH_SHORT).show();
                 overlay.animate().alpha(0f).setDuration(250).withEndAction(()->overlay.setVisibility(View.GONE)).start();
                 sequenceMenuButton.animate().alpha(1f).setDuration(200).withEndAction(()->sequenceMenuButton.setVisibility(View.VISIBLE)).start();
@@ -168,6 +173,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
                 if(input == false){
                     return;
                 }
+                HapticFeedbackManager.HapticFeedbackStrong(v);
 
                 // case of correct click
                 if(index == tilesSequence.get(currentIndex)){
@@ -190,12 +196,16 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
                     gameOverScreen.setVisibility(View.VISIBLE);
                     overlay.setVisibility(View.VISIBLE);
 
-
+                    //save high score
                     if (round > highScore){
                         HighScoreManager.insertHighScore(this, "Sequence Game", round);
                     }
 
+                    // record played game
+                    DailyActivityManager.RecordGame(this,"Sequence Game");
+
                     retryButton.setOnClickListener(v1 -> {
+                        HapticFeedbackManager.HapticFeedbackLight(v1);
                         for(View tile1 : tiles){
                             tile1.setBackgroundResource(R.drawable.sequence_tile_background);
                         }
@@ -206,6 +216,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
                         rootView.postDelayed(this::startRound, 600);
                     });
                     quitButton.setOnClickListener(v1 -> {
+                        HapticFeedbackManager.HapticFeedbackLight(v1);
                         onBackPressed();
                     });
                 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -94,8 +95,9 @@ public class MainActivity extends AppCompatActivity {
         statsButton = findViewById(R.id.stats_button);
 
         statsButton.setOnClickListener(v->{
+            HapticFeedbackManager.HapticFeedbackLight(v);
             Context context = rootView.getContext();
-            Intent intent = new Intent(context, StatsScreen.class);
+            Intent intent = new Intent(context, StatsScreenActivity.class);
             context.startActivity(intent);
 
         });
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
 
         drawerMenuButton.setOnClickListener(v->{
+            HapticFeedbackManager.HapticFeedbackLight(v);
             drawerLayout.openDrawer(GravityCompat.START);
         });
 
@@ -120,12 +123,20 @@ public class MainActivity extends AppCompatActivity {
             public void onDrawerOpened(@NonNull View drawerView) {
                 drawerBackButton = navigationView.findViewById(R.id.drawer_back_button);
                 drawerBackButton.setOnClickListener(v->{
+                    HapticFeedbackManager.HapticFeedbackLight(v);
                     drawerLayout.closeDrawer(GravityCompat.START);
                 });
             }
 
             @Override
-            public void onDrawerClosed(@NonNull View drawerView) {}
+            public void onDrawerClosed(@NonNull View drawerView) {
+                if(navigationView != null){
+                    int size = navigationView.getMenu().size();
+                    for(int i = 0; i < size; i++){
+                        navigationView.getMenu().getItem(i).setChecked(false);
+                    }
+                }
+            }
 
             @Override
             public void onDrawerStateChanged(int newState) {}
@@ -134,11 +145,12 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.drawer_home) {
-                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.drawer_settings) {
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
             } else if (id == R.id.drawer_about) {
-                Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "It just works!", Toast.LENGTH_SHORT).show();
             }
 
             drawerLayout.closeDrawer(GravityCompat.START);
@@ -146,5 +158,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
 }

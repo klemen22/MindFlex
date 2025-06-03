@@ -1,7 +1,9 @@
 package com.example.mindflex.game.activites;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.Toast.*;
+
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,13 +21,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.mindflex.HapticFeedbackManager;
 import com.example.mindflex.R;
+import com.example.mindflex.database.DailyActivityManager;
 import com.example.mindflex.database.HighScoreManager;
 
 import java.io.BufferedReader;
@@ -69,7 +75,6 @@ public class TypingGameActivity extends AppCompatActivity {
     private int currentScore = 0;
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,12 +116,12 @@ public class TypingGameActivity extends AppCompatActivity {
         HighScoreManager.getHighScore(this, "Typing Game", new HighScoreManager.HighScoreCallback() {
             @Override
             public void onResult(int score) {
-                runOnUiThread(()->{
+                runOnUiThread(() -> {
                     highScore = score;
                 });
             }
         });
-        
+
         // load sentences
         sentences = loadSentences("sentences1.txt");
 
@@ -128,31 +133,34 @@ public class TypingGameActivity extends AppCompatActivity {
 
         // menu button
         typeMenuButton.setOnClickListener(v -> {
-            if(!testFlag) {
+            if (!testFlag) {
                 return;
             }
+            HapticFeedbackManager.HapticFeedbackLight(v);
             pauseTime = System.currentTimeMillis();
             wasTimerRunning = timerRunning;
             timerRunning = false;
             typeInput.setEnabled(false);
-            typeOverlay.animate().alpha(1f).setDuration(250).withEndAction(()->typeOverlay.setVisibility(VISIBLE)).start();
-            typeMenuButton.animate().alpha(0f).setDuration(200).withEndAction(()->typeMenuButton.setVisibility(GONE)).start();
+            typeOverlay.animate().alpha(1f).setDuration(250).withEndAction(() -> typeOverlay.setVisibility(VISIBLE)).start();
+            typeMenuButton.animate().alpha(0f).setDuration(200).withEndAction(() -> typeMenuButton.setVisibility(GONE)).start();
             typeMenu.setVisibility(VISIBLE);
             typeMenu.setTranslationY(typeMenu.getHeight());
             typeMain.animate().translationY(-80).setDuration(300).start();
             typeMenu.animate().translationY(0).setDuration(400).start();
 
             typeGameMenuBackButton.setOnClickListener(vv -> {
+                HapticFeedbackManager.HapticFeedbackLight(vv);
                 onBackPressed();
             });
 
             typeGameMenuPlayButton.setOnClickListener(vv -> {
+                HapticFeedbackManager.HapticFeedbackLight(vv);
                 typeInput.setEnabled(true);
-                typeOverlay.animate().alpha(0f).setDuration(250).withEndAction(()->typeOverlay.setVisibility(GONE)).start();
-                typeMenuButton.animate().alpha(1f).setDuration(200).withEndAction(()->typeMenuButton.setVisibility(VISIBLE)).start();
+                typeOverlay.animate().alpha(0f).setDuration(250).withEndAction(() -> typeOverlay.setVisibility(GONE)).start();
+                typeMenuButton.animate().alpha(1f).setDuration(200).withEndAction(() -> typeMenuButton.setVisibility(VISIBLE)).start();
                 typeMain.animate().translationY(0).setDuration(300).start();
-                typeMenu.animate().translationY(typeMenu.getHeight()).setDuration(400).withEndAction(()->typeMenu.setVisibility(GONE)).start();
-                if(wasTimerRunning) {
+                typeMenu.animate().translationY(typeMenu.getHeight()).setDuration(400).withEndAction(() -> typeMenu.setVisibility(GONE)).start();
+                if (wasTimerRunning) {
                     timerRunning = true;
                     timerHandler.postDelayed(timerRunnable, 0);
                     long resumeTime = System.currentTimeMillis();
@@ -161,12 +169,13 @@ public class TypingGameActivity extends AppCompatActivity {
             });
 
             typeGameMenuRestartButton.setOnClickListener(vv -> {
+                HapticFeedbackManager.HapticFeedbackLight(vv);
                 makeText(this, "Restarting...", LENGTH_SHORT).show();
                 typeInput.setEnabled(true);
-                typeOverlay.animate().alpha(0f).setDuration(250).withEndAction(()->typeOverlay.setVisibility(GONE)).start();
-                typeMenuButton.animate().alpha(1f).setDuration(200).withEndAction(()->typeMenuButton.setVisibility(VISIBLE)).start();
+                typeOverlay.animate().alpha(0f).setDuration(250).withEndAction(() -> typeOverlay.setVisibility(GONE)).start();
+                typeMenuButton.animate().alpha(1f).setDuration(200).withEndAction(() -> typeMenuButton.setVisibility(VISIBLE)).start();
                 typeMain.animate().translationY(0).setDuration(300).start();
-                typeMenu.animate().translationY(typeMenu.getHeight()).setDuration(400).withEndAction(()->typeMenu.setVisibility(GONE)).start();
+                typeMenu.animate().translationY(typeMenu.getHeight()).setDuration(400).withEndAction(() -> typeMenu.setVisibility(GONE)).start();
                 roundNum = 0;
                 startRound();
             });
@@ -174,6 +183,7 @@ public class TypingGameActivity extends AppCompatActivity {
         });
 
         typeStartButton.setOnClickListener(v -> {
+            HapticFeedbackManager.HapticFeedbackLight(v);
             typeStartScreen.setVisibility(GONE);
             typeOverlay.setVisibility(GONE);
             startRound();
@@ -188,7 +198,7 @@ public class TypingGameActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!timerRunning && s.length() > 0) {
+                if (!timerRunning && s.length() > 0) {
                     startTime = System.currentTimeMillis();
                     timerRunning = true;
                     timerHandler.postDelayed(timerRunnable, 0);
@@ -214,7 +224,7 @@ public class TypingGameActivity extends AppCompatActivity {
                     typeTime.setText(String.format("Time: %02d:%02d", minutes, seconds));
                     wordCount = typeInput.getText().toString().split("\\s+").length;
                     wpm = (int) (wordCount / (millis / 60000.0));
-                    if (wpm > currentScore && millis > 2000){
+                    if (wpm > currentScore && millis > 2000) {
                         currentScore = wpm;
                     }
                     if (millis > 2000) {
@@ -233,7 +243,7 @@ public class TypingGameActivity extends AppCompatActivity {
             Toast.makeText(this, "Sentences are not available", LENGTH_SHORT).show();
             return;
         }
-        if (currentScore > highScore){
+        if (currentScore > highScore) {
             highScore = currentScore;
             currentScore = 0;
             HighScoreManager.insertHighScore(this, "Typing Game", highScore);
@@ -276,6 +286,10 @@ public class TypingGameActivity extends AppCompatActivity {
             testFlag = false;
             timerRunning = false;
             Toast.makeText(this, "Starting next round", LENGTH_SHORT).show();
+
+            // record played game
+            DailyActivityManager.RecordGame(this, "Typing Game");
+
             rootView.postDelayed(this::startRound, 500);
         }
     }
@@ -302,8 +316,8 @@ public class TypingGameActivity extends AppCompatActivity {
     }
 
 
-    private void fadeText (TextView textView, String text) {
-        textView.animate().alpha(0f).setDuration(200).withEndAction(()->{
+    private void fadeText(TextView textView, String text) {
+        textView.animate().alpha(0f).setDuration(200).withEndAction(() -> {
             textView.setText(text);
             textView.animate().alpha(1f).setDuration(200).start();
         }).start();
