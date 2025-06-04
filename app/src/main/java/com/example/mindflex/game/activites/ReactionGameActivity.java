@@ -1,37 +1,15 @@
 package com.example.mindflex.game.activites;
 
-import android.os.Build;
+
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
-import com.example.mindflex.HapticFeedbackManager;
 import com.example.mindflex.R;
-import com.example.mindflex.database.DailyActivityManager;
-import com.example.mindflex.database.HighScoreManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
-import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
