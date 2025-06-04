@@ -16,7 +16,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         // TODO: fix music reading and settings at the start of the app
-        MusicManager.startMusic(this, R.raw.souls_of_fire);
+        // MusicManager.startMusic(this, R.raw.souls_of_fire);
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override

@@ -46,6 +46,16 @@
     <color name="type_light_text">#FFF3F0</color>
     <color name="type_border_soft">#F5A99E</color>
 
+    <!-- Reaction test game colors -->
+    <color name="reaction_main">#4DB6AC</color> <!-- teal -->
+    <color name="reaction_background">#E0F2F1</color>
+    <color name="reaction_background_dark">#00796B</color>
+    <color name="reaction_highlight">#B2DFDB</color>
+    <color name="reaction_highlight_dark">#80CBC4</color>
+    <color name="reaction_text_primary">#2E2E2E</color>
+    <color name="reaction_light_text">#FFFFFF</color>
+    <color name="reaction_border_soft">#A7D8D3</color>
+
     <!-- Stats screen -->
     <color name="stats_background">#FAFAFA</color>
     <color name="stats_card_background">#FFFFFF</color>
