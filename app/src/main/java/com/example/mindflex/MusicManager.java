@@ -54,8 +54,19 @@ public class MusicManager {
         }
     }
 
-    public static int getCurrentMusic() {
-        return currentMusicID;
+    public static void setMusicVolume(float volumeLevel){
+        mediaPlayer.setVolume(volumeLevel, volumeLevel);
+    }
+
+    public static Map<String, Integer> getMusicMap(){
+        Map<String, Integer> musicMap = new LinkedHashMap<String, Integer>() {{
+            put("Souls of fire", R.raw.souls_of_fire);
+            put("At doom's gate", R.raw.at_dooms_gate);
+            put("Into Sandy's city", R.raw.into_sandys_city);
+            put("The ancient dragon", R.raw.the_ancient_dragon);
+        }};
+
+        return musicMap;
     }
 
 }

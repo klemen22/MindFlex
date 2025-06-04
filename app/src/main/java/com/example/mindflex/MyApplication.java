@@ -2,21 +2,36 @@ package com.example.mindflex;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.Map;
 
 public class MyApplication extends Application {
 
     private int activityReference = 0;
     private boolean activityChanging = false;
+    SharedPreferences preferences;
+    Map<String, Integer> musicMap = MusicManager.getMusicMap();
 
     @Override
     public void onCreate() {
         super.onCreate();
-        // TODO: fix music reading and settings at the start of the app
-        MusicManager.startMusic(this, R.raw.souls_of_fire);
+
+        preferences = getSharedPreferences("app_settings", MODE_PRIVATE);
+        String savedMusic = preferences.getString("music_key", "Souls of fire");
+        int musicID = musicMap.get(savedMusic);
+        float volumeLevel = preferences.getFloat("volume_key", 1.0f);
+        boolean HapticEnabled = preferences.getBoolean("haptic_key", true);
+
+
+        HapticFeedbackManager.EnableHapticFeedback(HapticEnabled);
+        MusicManager.startMusic(this, musicID);
+        MusicManager.setMusicVolume(volumeLevel);
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
@@ -43,7 +58,7 @@ public class MyApplication extends Application {
             public void onActivityStopped(@NonNull Activity activity) {
                 activityChanging = activity.isChangingConfigurations();
                 activityReference--;
-                if (activityReference == 0 && !activityChanging){
+                if (activityReference == 0 && !activityChanging) {
                     MusicManager.pauseMusic();
                 }
             }
