@@ -56,6 +56,14 @@
     <color name="reaction_light_text">#FFFFFF</color>
     <color name="reaction_border_soft">#A7D8D3</color>
 
+    <!-- Number memory game colors -->
+    <color name="number_main">#FFA500</color> <!-- bright orange -->
+    <color name="number_background">#FFF5E0</color> <!-- soft background to match -->
+    <color name="number_text_primary">#2E2E2E</color>
+    <color name="number_light_text">#FFFFFF</color>
+    <color name="number_border_soft">#FFD199</color>
+
+
     <!-- Stats screen -->
     <color name="stats_background">#FAFAFA</color>
     <color name="stats_card_background">#FFFFFF</color>

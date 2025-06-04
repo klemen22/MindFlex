@@ -1,38 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/number_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="14sp">
+    android:background="@color/number_background"
+    android:clickable="true"
+    android:focusable="true">
 
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:id="@+id/back_button"
-        android:textSize="16sp"
-        android:includeFontPadding="false"
-        android:fontFamily="@font/rajdhani_regular"
-        android:textColor="@color/black"
-        android:text="Back"/>
-
-    <LinearLayout
+    <!-- Overlay if needed -->
+    <View
+        android:id="@+id/number_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:background="@color/overlay_dimmed"
+        android:elevation="100dp"
+        android:visibility="gone" />
 
-        <TextView
-            android:layout_width="wrap_content"
+    <!-- Start screen -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/number_start"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="8dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/number_background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Number game placeholder"
-            android:textSize="24sp"
-            android:fontFamily="@font/rajdhani_medium"
-            android:textColor="@color/black"
-            android:includeFontPadding="false" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/number_small_screen_background"
+            android:padding="24dp">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/number_game_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:text="Number Memory"
+                android:textColor="@color/number_text_primary"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/number_game_highscore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/rajdhani_regular"
+                android:text="Highscore: 0"
+                android:textColor="@color/number_text_primary"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/number_start_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/number_main"
+                android:fontFamily="@font/rajdhani_regular"
+                android:text="Start"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Game screen -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:fillViewport="true">
+        <LinearLayout
+            android:id="@+id/number_game_screen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="14dp"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/number_instruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get ready..."
+                android:textSize="28sp"
+                android:textColor="@color/number_text_primary"
+                android:fontFamily="@font/rajdhani_medium" />
+
+            <ProgressBar
+                android:id="@+id/number_timer_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="250dp"
+                android:layout_height="8dp"
+                android:max="1000"
+                android:progress="1000"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:indeterminate="false"
+                android:visibility="gone"
+                android:progressDrawable="@drawable/progress_orange_bar" />
 
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/number_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123"
+                android:textSize="32sp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:fontFamily="@font/rajdhani_bold"
+                android:textColor="@color/number_text_primary" />
+
+            <EditText
+                android:id="@+id/number_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Enter the number"
+                android:inputType="number"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:fontFamily="@font/rajdhani_regular"
+                android:textColor="@color/number_text_primary"
+                android:backgroundTint="@color/number_main" />
+
+            <Button
+                android:id="@+id/number_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                android:backgroundTint="@color/number_main"
+                android:textColor="@color/white"
+                android:fontFamily="@font/rajdhani_regular" />
+
+            <TextView
+                android:id="@+id/number_feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correct!"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/rajdhani_regular"
+                android:textColor="@color/number_text_primary" />
+
+            <Button
+                android:id="@+id/number_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Play Again"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                android:backgroundTint="@color/number_main"
+                android:textColor="@color/white"
+                android:fontFamily="@font/rajdhani_regular" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
