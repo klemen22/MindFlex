@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="14dp"
-    tools:context=".DailyActivity">
+    tools:context=".DailyScreenActivity">
 
     <ImageView
         android:id="@+id/daily_activity_back_button"
@@ -16,7 +16,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:padding="10dp"
-        android:src="@drawable/back_thin100"
+        android:src="@drawable/back100"
         app:tint="@color/stats_text_primary" />
 
     <TextView

@@ -59,7 +59,7 @@ public class StatsScreenActivity extends AppCompatActivity {
         dailyActivityButton.setOnClickListener(v -> {
             HapticFeedbackManager.HapticFeedbackLight(v);
             Context context = rootView.getContext();
-            Intent intent = new Intent(context, DailyActivity.class);
+            Intent intent = new Intent(context, DailyScreenActivity.class);
             context.startActivity(intent);
 
         });

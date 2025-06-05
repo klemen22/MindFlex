@@ -1,38 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reaction_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="14sp">
+    android:background="@color/reaction_background"
+    android:clickable="true"
+    android:focusable="true">
 
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:id="@+id/back_button"
-        android:textSize="16sp"
-        android:includeFontPadding="false"
-        android:fontFamily="@font/rajdhani_regular"
-        android:textColor="@color/black"
-        android:text="Back"/>
-
-    <LinearLayout
+    <View
+        android:id="@+id/reaction_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:background="@color/overlay_dimmed"
+        android:elevation="100dp"
+        android:visibility="visible" />
+
+    <!-- Start screen -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/reaction_start"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="8dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/reaction_background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/reaction_small_screen_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:text="Reaction Test"
+                android:textColor="@color/reaction_text_primary"
+                android:textSize="26sp" />
+
+            <Button
+                android:id="@+id/reaction_start_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/reaction_main"
+                android:fontFamily="@font/rajdhani_regular"
+                android:text="Start"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Game screen -->
+    <LinearLayout
+        android:id="@+id/reaction_game_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="14dp"
+        android:gravity="center"
+        android:visibility="gone">
 
         <TextView
+            android:id="@+id/reaction_instruction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reaction time game placeholder"
-            android:textSize="24sp"
-            android:fontFamily="@font/rajdhani_medium"
-            android:textColor="@color/black"
-            android:includeFontPadding="false" />
+            android:text="Wait for green..."
+            android:textSize="28sp"
+            android:textColor="@color/reaction_text_primary"
+            android:fontFamily="@font/rajdhani_medium" />
 
     </LinearLayout>
 
+    <!-- Game over screen -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/reaction_game_over"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="8dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/reaction_background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="100dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/reaction_small_screen_background"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/reaction_game_over_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="Reaction time"
+                android:textColor="@color/chimp_text_primary"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/reaction_game_over_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:includeFontPadding="false"
+                android:text="100ms"
+                android:textColor="@color/reaction_text_primary"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/reaction_game_over_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rajdhani_regular"
+                    android:includeFontPadding="false"
+                    android:text="Back"
+                    android:backgroundTint="@color/reaction_main"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/reaction_game_over_restart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:fontFamily="@font/rajdhani_regular"
+                    android:includeFontPadding="false"
+                    android:backgroundTint="@color/reaction_main"
+                    android:text="Retry"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

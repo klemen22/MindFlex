@@ -39,7 +39,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class DailyActivity extends AppCompatActivity {
+public class DailyScreenActivity extends AppCompatActivity {
     List<float[]> rawData = new ArrayList<>();
     private BarChart barChart;
 
@@ -160,7 +160,7 @@ public class DailyActivity extends AppCompatActivity {
                 ContextCompat.getColor(this, R.color.chimp_main),     // Chimp Game
                 ContextCompat.getColor(this, R.color.green),          // Letter Game
                 ContextCompat.getColor(this, R.color.orange),         // Number Mame
-                ContextCompat.getColor(this, R.color.red),            // Reaction Game
+                ContextCompat.getColor(this, R.color.reaction_main),  // Reaction Game
                 ContextCompat.getColor(this, R.color.sequence_main),  // Sequence Game
                 ContextCompat.getColor(this, R.color.type_main)       // Typing Game
         );
@@ -240,7 +240,7 @@ public class DailyActivity extends AppCompatActivity {
                         if (currentToast != null) {
                             currentToast.cancel();
                         }
-                        currentToast = Toast.makeText(DailyActivity.this, finalMsg, Toast.LENGTH_SHORT);
+                        currentToast = Toast.makeText(DailyScreenActivity.this, finalMsg, Toast.LENGTH_SHORT);
                         currentToast.show();
                     }
                 }

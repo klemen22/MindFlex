@@ -68,4 +68,14 @@
     <color name="slider_halo1">#88D44DFF</color>
     <color name="slider_halo2">#55A3FFFF</color>
 
+    <!-- Reaction test game colors -->
+    <color name="reaction_main">#4DB6AC</color>
+    <color name="reaction_background">#E0F2F1</color>
+    <color name="reaction_background_dark">#00796B</color>
+    <color name="reaction_highlight">#B2DFDB</color>
+    <color name="reaction_highlight_dark">#80CBC4</color>
+    <color name="reaction_text_primary">#2E2E2E</color>
+    <color name="reaction_light_text">#FFFFFF</color>
+    <color name="reaction_border_soft">#A7D8D3</color>
+
 </resources>

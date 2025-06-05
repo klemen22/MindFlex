@@ -22,21 +22,21 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:gravity="center">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/app_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/app_title"
-                    android:text="@string/mindflex"
+                    android:layout_marginEnd="20sp"
                     android:fontFamily="@font/rajdhani_bold"
                     android:includeFontPadding="false"
+                    android:text="@string/mindflex"
                     android:textColor="@color/black"
-                    android:textSize="30sp"
-                    android:layout_marginEnd="20sp"/>
+                    android:textSize="30sp" />
 
                 <ImageView
                     android:id="@+id/logo"
@@ -47,28 +47,30 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/menu_button"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
-                android:id="@+id/menu_button"
+                android:clickable="true"
                 android:contentDescription="@string/menu"
-                app:layout_constraintStart_toStartOf="parent"
-                android:src="@drawable/menu_colored100"
+                android:focusable="true"
                 android:padding="10dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/menu_colored100"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:clickable="true"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/stats_button"
                 android:layout_width="46sp"
                 android:layout_height="46sp"
-                android:padding="6dp"
+                android:clickable="true"
                 android:contentDescription="@string/stats"
+                android:focusable="true"
+                android:padding="6dp"
                 android:src="@drawable/stats100"
-                android:id="@+id/stats_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:clickable="true"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- recyclerView -->
@@ -77,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
