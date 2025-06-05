@@ -141,12 +141,12 @@ public class TypingGameActivity extends AppCompatActivity {
             wasTimerRunning = timerRunning;
             timerRunning = false;
             typeInput.setEnabled(false);
-            typeOverlay.animate().alpha(1f).setDuration(250).withEndAction(() -> typeOverlay.setVisibility(VISIBLE)).start();
-            typeMenuButton.animate().alpha(0f).setDuration(200).withEndAction(() -> typeMenuButton.setVisibility(GONE)).start();
+            typeOverlay.animate().alpha(1f).setDuration(300).withEndAction(() -> typeOverlay.setVisibility(VISIBLE)).start();
+            typeMenuButton.animate().alpha(0f).setDuration(300).withEndAction(() -> typeMenuButton.setVisibility(GONE)).start();
             typeMenu.setVisibility(VISIBLE);
             typeMenu.setTranslationY(typeMenu.getHeight());
             typeMain.animate().translationY(-80).setDuration(300).start();
-            typeMenu.animate().translationY(0).setDuration(400).start();
+            typeMenu.animate().translationY(0).setDuration(300).start();
 
             typeGameMenuBackButton.setOnClickListener(vv -> {
                 HapticFeedbackManager.HapticFeedbackLight(vv);
@@ -156,10 +156,10 @@ public class TypingGameActivity extends AppCompatActivity {
             typeGameMenuPlayButton.setOnClickListener(vv -> {
                 HapticFeedbackManager.HapticFeedbackLight(vv);
                 typeInput.setEnabled(true);
-                typeOverlay.animate().alpha(0f).setDuration(250).withEndAction(() -> typeOverlay.setVisibility(GONE)).start();
-                typeMenuButton.animate().alpha(1f).setDuration(200).withEndAction(() -> typeMenuButton.setVisibility(VISIBLE)).start();
+                typeOverlay.animate().alpha(0f).setDuration(300).withEndAction(() -> typeOverlay.setVisibility(GONE)).start();
+                typeMenuButton.animate().alpha(1f).setDuration(300).withEndAction(() -> typeMenuButton.setVisibility(VISIBLE)).start();
                 typeMain.animate().translationY(0).setDuration(300).start();
-                typeMenu.animate().translationY(typeMenu.getHeight()).setDuration(400).withEndAction(() -> typeMenu.setVisibility(GONE)).start();
+                typeMenu.animate().translationY(typeMenu.getHeight()).setDuration(300).withEndAction(() -> typeMenu.setVisibility(GONE)).start();
                 if (wasTimerRunning) {
                     timerRunning = true;
                     timerHandler.postDelayed(timerRunnable, 0);
@@ -172,10 +172,10 @@ public class TypingGameActivity extends AppCompatActivity {
                 HapticFeedbackManager.HapticFeedbackLight(vv);
                 makeText(this, "Restarting...", LENGTH_SHORT).show();
                 typeInput.setEnabled(true);
-                typeOverlay.animate().alpha(0f).setDuration(250).withEndAction(() -> typeOverlay.setVisibility(GONE)).start();
-                typeMenuButton.animate().alpha(1f).setDuration(200).withEndAction(() -> typeMenuButton.setVisibility(VISIBLE)).start();
+                typeOverlay.animate().alpha(0f).setDuration(300).withEndAction(() -> typeOverlay.setVisibility(GONE)).start();
+                typeMenuButton.animate().alpha(1f).setDuration(300).withEndAction(() -> typeMenuButton.setVisibility(VISIBLE)).start();
                 typeMain.animate().translationY(0).setDuration(300).start();
-                typeMenu.animate().translationY(typeMenu.getHeight()).setDuration(400).withEndAction(() -> typeMenu.setVisibility(GONE)).start();
+                typeMenu.animate().translationY(typeMenu.getHeight()).setDuration(300).withEndAction(() -> typeMenu.setVisibility(GONE)).start();
                 roundNum = 0;
                 startRound();
             });

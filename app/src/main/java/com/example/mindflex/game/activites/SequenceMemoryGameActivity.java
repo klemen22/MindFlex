@@ -122,12 +122,12 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             input = false;
             HapticFeedbackManager.HapticFeedbackLight(v);
 
-            overlay.animate().alpha(1f).setDuration(250).withEndAction(()->overlay.setVisibility(View.VISIBLE)).start();
-            sequenceMenuButton.animate().alpha(0f).setDuration(200).withEndAction(()->sequenceMenuButton.setVisibility(View.GONE)).start();
+            overlay.animate().alpha(1f).setDuration(300).withEndAction(()->overlay.setVisibility(View.VISIBLE)).start();
+            sequenceMenuButton.animate().alpha(0f).setDuration(300).withEndAction(()->sequenceMenuButton.setVisibility(View.GONE)).start();
             sequenceMenu.setVisibility(View.VISIBLE);
             sequenceMenu.setTranslationY(sequenceMenu.getHeight());
             sequenceMain.animate().translationY(-80).setDuration(300).start();
-            sequenceMenu.animate().translationY(0).setDuration(400).start(); 
+            sequenceMenu.animate().translationY(0).setDuration(300).start();
 
             sequenceMenuBack.setOnClickListener(vv->{
                 HapticFeedbackManager.HapticFeedbackLight(vv);
@@ -137,19 +137,19 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             sequenceMenuPlay.setOnClickListener(vv->{
                 HapticFeedbackManager.HapticFeedbackLight(vv);
                 input = true;
-                overlay.animate().alpha(0f).setDuration(250).withEndAction(()->overlay.setVisibility(View.GONE)).start();
-                sequenceMenuButton.animate().alpha(1f).setDuration(200).withEndAction(()->sequenceMenuButton.setVisibility(View.VISIBLE)).start();
+                overlay.animate().alpha(0f).setDuration(300).withEndAction(()->overlay.setVisibility(View.GONE)).start();
+                sequenceMenuButton.animate().alpha(1f).setDuration(300).withEndAction(()->sequenceMenuButton.setVisibility(View.VISIBLE)).start();
                 sequenceMain.animate().translationY(0).setDuration(300).start();
-                sequenceMenu.animate().translationY(sequenceMenu.getHeight()).setDuration(400).withEndAction(()->sequenceMenu.setVisibility(View.GONE)).start();
+                sequenceMenu.animate().translationY(sequenceMenu.getHeight()).setDuration(300).withEndAction(()->sequenceMenu.setVisibility(View.GONE)).start();
             });
 
             sequenceMenuRestart.setOnClickListener(vv->{
                 HapticFeedbackManager.HapticFeedbackLight(vv);
                 Toast.makeText(this, "Restarting...", Toast.LENGTH_SHORT).show();
-                overlay.animate().alpha(0f).setDuration(250).withEndAction(()->overlay.setVisibility(View.GONE)).start();
-                sequenceMenuButton.animate().alpha(1f).setDuration(200).withEndAction(()->sequenceMenuButton.setVisibility(View.VISIBLE)).start();
+                overlay.animate().alpha(0f).setDuration(300).withEndAction(()->overlay.setVisibility(View.GONE)).start();
+                sequenceMenuButton.animate().alpha(1f).setDuration(300).withEndAction(()->sequenceMenuButton.setVisibility(View.VISIBLE)).start();
                 sequenceMain.animate().translationY(0).setDuration(300).start();
-                sequenceMenu.animate().translationY(sequenceMenu.getHeight()).setDuration(400).withEndAction(()->sequenceMenu.setVisibility(View.GONE)).start();
+                sequenceMenu.animate().translationY(sequenceMenu.getHeight()).setDuration(300).withEndAction(()->sequenceMenu.setVisibility(View.GONE)).start();
                 round = 0;
                 scoreText.setText("Level: "+ (round + 1));
                 startRound();

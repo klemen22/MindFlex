@@ -141,7 +141,7 @@ public class ChimpTestActivity extends AppCompatActivity {
             HapticFeedbackManager.HapticFeedbackLight(v);
             input = false;
             chimpOverlay.animate().alpha(1f).setDuration(300).withEndAction(() -> chimpOverlay.setVisibility(View.VISIBLE)).start();
-            chimpMenuButton.animate().alpha(0f).setDuration(200).withEndAction(() -> chimpMenuButton.setVisibility(View.GONE)).start();
+            chimpMenuButton.animate().alpha(0f).setDuration(300).withEndAction(() -> chimpMenuButton.setVisibility(View.GONE)).start();
             chimpGameMenu.setVisibility(View.VISIBLE);
             chimpGameMenu.setTranslationY(chimpGameMenu.getHeight());
             chimpMain.animate().translationY(-80).setDuration(300).start();
@@ -156,7 +156,7 @@ public class ChimpTestActivity extends AppCompatActivity {
                 HapticFeedbackManager.HapticFeedbackLight(vv);
                 input = true;
                 chimpOverlay.animate().alpha(0f).setDuration(300).withEndAction(() -> chimpGameMenu.setVisibility(View.GONE)).start();
-                chimpMenuButton.animate().alpha(1f).setDuration(200).withEndAction(() -> chimpMenuButton.setVisibility(View.VISIBLE)).start();
+                chimpMenuButton.animate().alpha(1f).setDuration(300).withEndAction(() -> chimpMenuButton.setVisibility(View.VISIBLE)).start();
                 chimpMain.animate().translationY(0).setDuration(300).start();
                 chimpGameMenu.animate().translationY(chimpGameMenu.getHeight()).setDuration(300).withEndAction(() -> chimpGameMenu.setVisibility(View.GONE)).start();
             });
@@ -164,7 +164,7 @@ public class ChimpTestActivity extends AppCompatActivity {
             chimpGameMenuRestart.setOnClickListener(vv -> {
                 HapticFeedbackManager.HapticFeedbackLight(vv);
                 chimpOverlay.animate().alpha(0f).setDuration(300).withEndAction(() -> chimpGameMenu.setVisibility(View.GONE)).start();
-                chimpMenuButton.animate().alpha(1f).setDuration(200).withEndAction(() -> chimpMenuButton.setVisibility(View.VISIBLE)).start();
+                chimpMenuButton.animate().alpha(1f).setDuration(300).withEndAction(() -> chimpMenuButton.setVisibility(View.VISIBLE)).start();
                 chimpMain.animate().translationY(0).setDuration(300).start();
                 chimpGameMenu.animate().translationY(chimpGameMenu.getHeight()).setDuration(300).withEndAction(() -> chimpGameMenu.setVisibility(View.GONE)).start();
                 round = 0;
