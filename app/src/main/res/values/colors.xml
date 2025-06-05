@@ -78,4 +78,16 @@
     <color name="reaction_light_text">#FFFFFF</color>
     <color name="reaction_border_soft">#A7D8D3</color>
 
+    <!-- Number memory game colors -->
+    <color name="number_main">#FFA500</color>
+    <color name="number_background">#FFF5E0</color>
+    <color name="number_background_dark">#CC8400</color>
+    <color name="number_highlight">#FFE0B2</color>
+    <color name="number_highlight_dark">#FFB74D</color>
+    <color name="number_text_primary">#2E2E2E</color>
+    <color name="number_text_light">#9E9E9E</color>
+    <color name="number_light_text">#FFFFFF</color>
+    <color name="number_border_soft">#FFD199</color>
+
+
 </resources>

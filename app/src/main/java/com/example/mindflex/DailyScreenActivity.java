@@ -48,7 +48,7 @@ public class DailyScreenActivity extends AppCompatActivity {
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    private static final String[] game_ids = {"Chimp Game", "Letter Game", "Number Mame",
+    private static final String[] game_ids = {"Chimp Game", "Letter Game", "Number Game",
             "Reaction Game", "Sequence Game", "Typing Game"};
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -159,7 +159,7 @@ public class DailyScreenActivity extends AppCompatActivity {
         barDataSet.setColors(
                 ContextCompat.getColor(this, R.color.chimp_main),     // Chimp Game
                 ContextCompat.getColor(this, R.color.green),          // Letter Game
-                ContextCompat.getColor(this, R.color.orange),         // Number Mame
+                ContextCompat.getColor(this, R.color.number_main),    // Number Mame
                 ContextCompat.getColor(this, R.color.reaction_main),  // Reaction Game
                 ContextCompat.getColor(this, R.color.sequence_main),  // Sequence Game
                 ContextCompat.getColor(this, R.color.type_main)       // Typing Game
@@ -168,7 +168,7 @@ public class DailyScreenActivity extends AppCompatActivity {
 
         // be careful with order!!
         barDataSet.setStackLabels(new String[]{
-                "Chimp Game", "Letter Game", "Number Mame",
+                "Chimp Game", "Letter Game", "Number Game",
                 "Reaction Game", "Sequence Game", "Typing Game"
         });
 
@@ -227,7 +227,7 @@ public class DailyScreenActivity extends AppCompatActivity {
                 int dayIndex = (int) e.getX();
                 int gameIndex = h.getStackIndex();
                 String[] gameName = {
-                        "Chimp Game", "Letter Game", "Number Mame",
+                        "Chimp Game", "Letter Game", "Number Game",
                         "Reaction Game", "Sequence Game", "Typing Game"
                 };
 
