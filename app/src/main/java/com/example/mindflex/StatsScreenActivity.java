@@ -26,7 +26,7 @@ public class StatsScreenActivity extends AppCompatActivity {
     private List<ScoreItem> scoreItemList = new ArrayList<>();
     private ScoreAdapter scoreAdapter;
 
-    private static final String[] game_ids = {"Chimp Game", "Letter Game", "Number Mame",
+    private static final String[] game_ids = {"Chimp Game", "Verbal Game", "Number Mame",
             "Reaction Game", "Sequence Game", "Typing Game"};
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 

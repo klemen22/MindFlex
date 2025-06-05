@@ -78,4 +78,12 @@
     <color name="reaction_light_text">#FFFFFF</color>
     <color name="reaction_border_soft">#A7D8D3</color>
 
+    <!-- Letter game colors -->
+    <color name="letter_main">#0ED00E</color>
+    <color name="letter_background">#E4FBE4</color>
+    <color name="letter_text_primary">#2E2E2E</color>
+    <color name="letter_light_text">#FFFFFF</color>
+    <color name="letter_border_soft">#A3E6A3</color>
+
+
 </resources>

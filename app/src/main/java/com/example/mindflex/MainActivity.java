@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     String chimpGameDesc = "This is a test of working memory, that gets increasingly difficult every turn, starting at 4 digits, and adding one every turn.\n\nIf you pass a level, the number increases. If you fail, you get a strike. Three strikes and the test is over.";
     String typingGameDesc = "This is a simple test of typing speed, measuring words per minute, or WPM.";
     String reactionGameDesc = "This is a simple test of reaction speed. When the screen turns green, tap as quickly as you can.\n\nYour score is the time it takes you to react, measured in milliseconds.";
-
+    String letterMemoryDesc = "This is a test of verbal memory. Words will appear one by one — tap SEEN if you've seen it before, or NEW if it's new.\n\nYou lose a life for every mistake. Survive as long as you can.";
     @SuppressLint("MissingInflatedId")
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         gameItemList = new ArrayList<>();
         gameItemList.add(new GameItem("Reaction Time", R.drawable.lightning_bolt_white100, getResources().getColor(R.color.reaction_main), getResources().getColor(R.color.reaction_background_dark),reactionGameDesc, ReactionGameActivity.class));
         gameItemList.add(new GameItem("Number Memory", R.drawable.numbers_white100, getResources().getColor(R.color.orange), getResources().getColor(R.color.black), "Placeholder2", NumberGameActivity.class));
-        gameItemList.add(new GameItem("Letter Memory", R.drawable.wordbook_white100, getResources().getColor(R.color.green), getResources().getColor(R.color.black),"Placeholder3", LetterGameActivity.class));
+        gameItemList.add(new GameItem("Verbal Memory", R.drawable.wordbook_white100, getResources().getColor(R.color.green), getResources().getColor(R.color.black),letterMemoryDesc, LetterGameActivity.class));
         gameItemList.add(new GameItem("Sequence Memory", R.drawable.grid_white100, getResources().getColor(R.color.sequence_main), getResources().getColor(R.color.sequence_background_dark), sequenceMemoryDesc, SequenceMemoryGameActivity.class));
         gameItemList.add(new GameItem("Chimp Game", R.drawable.monkey_white100, getResources().getColor(R.color.chimp_main), getResources().getColor(R.color.chimp_background_dark),chimpGameDesc, ChimpTestActivity.class));
         gameItemList.add(new GameItem("Typing Game", R.drawable.keyboard_white100, getResources().getColor(R.color.type_main), getResources().getColor(R.color.type_background_dark),typingGameDesc, TypingGameActivity.class));
