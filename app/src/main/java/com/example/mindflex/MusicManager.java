@@ -1,9 +1,6 @@
 package com.example.mindflex;
-
 import android.content.Context;
 import android.media.MediaPlayer;
-
-import java.net.Inet4Address;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -11,11 +8,10 @@ public class MusicManager {
     private static MediaPlayer mediaPlayer;
     private static boolean MusicStopped = false;
     private static int MusicPosition = 0;
-    private static float musicVolume = 1.0f;
-    private static int currentMusicID = -1; // default value
+    private static final float musicVolume = 1.0f;
+    private static int currentMusicID = -1;
 
     public static void startMusic(Context context, int musicID) {
-        // first stop music
         stopMusic();
 
         currentMusicID = musicID;
@@ -59,7 +55,7 @@ public class MusicManager {
     }
 
     public static Map<String, Integer> getMusicMap(){
-        Map<String, Integer> musicMap = new LinkedHashMap<String, Integer>() {{
+        Map<String, Integer> musicMap = new LinkedHashMap<>() {{
             put("Souls of fire", R.raw.souls_of_fire);
             put("At doom's gate", R.raw.at_dooms_gate);
             put("Into Sandy's city", R.raw.into_sandys_city);

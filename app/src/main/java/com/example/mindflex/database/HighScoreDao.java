@@ -5,7 +5,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-// Dao - Data Access Object // interface for reading and writing stuff into the high score table
 @Dao
 public interface HighScoreDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

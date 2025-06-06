@@ -1,14 +1,10 @@
 package com.example.mindflex;
-
 import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import java.util.Map;
 
 public class MyApplication extends Application {

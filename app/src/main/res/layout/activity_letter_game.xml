@@ -1,38 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/letter_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="14sp">
+    android:background="@color/letter_background"
+    android:clickable="true"
+    android:focusable="true">
 
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:id="@+id/back_button"
-        android:textSize="16sp"
-        android:includeFontPadding="false"
-        android:fontFamily="@font/rajdhani_regular"
-        android:textColor="@color/black"
-        android:text="Back"/>
-
-    <LinearLayout
+    <View
+        android:id="@+id/letter_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:background="@color/overlay_dimmed"
+        android:elevation="100dp"
+        android:visibility="visible" />
 
-        <TextView
+    <!-- Start screen -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/letter_start"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="8dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/letter_background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/letter_small_screen_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/letter_game_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:text="Verbal Memory"
+                android:textColor="@color/letter_text_primary"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/letter_game_highscore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/rajdhani_regular"
+                android:text="Highscore: 0"
+                android:textColor="@color/letter_text_primary"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/letter_start_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/letter_main"
+                android:fontFamily="@font/rajdhani_regular"
+                android:text="Start"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Game screen -->
+    <LinearLayout
+        android:id="@+id/letter_game_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:visibility="gone">
+
+        <!-- Score + Lives -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Letter game placeholder"
-            android:textSize="24sp"
-            android:fontFamily="@font/rajdhani_medium"
-            android:textColor="@color/black"
-            android:includeFontPadding="false" />
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/letter_lives_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/rajdhani_medium"
+                android:text="Lives | 3"
+                android:textColor="@color/letter_text_primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/letter_score_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rajdhani_medium"
+                android:text="Score | 0"
+                android:textColor="@color/letter_text_primary"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <!-- Word Display -->
+        <TextView
+            android:id="@+id/letter_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/rajdhani_bold"
+            android:text="word"
+            android:textColor="@color/letter_text_primary"
+            android:textSize="32sp" />
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/letter_button_seen"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:backgroundTint="@color/letter_main"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:text="SEEN"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/letter_button_new"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/letter_main"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:text="NEW"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="14dp">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/letter_game_menu_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/menu100"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/letter_border_soft" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Game over screen -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/letter_game_over"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="8dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/letter_background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/letter_small_screen_background"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="Game Over!\nScore"
+                android:textColor="@color/letter_text_primary"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/letter_game_over_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:includeFontPadding="false"
+                android:text="4"
+                android:textColor="@color/letter_text_primary"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/letter_game_over_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/letter_main"
+                    android:fontFamily="@font/rajdhani_regular"
+                    android:includeFontPadding="false"
+                    android:text="Back"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/letter_game_over_restart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:backgroundTint="@color/letter_main"
+                    android:fontFamily="@font/rajdhani_regular"
+                    android:includeFontPadding="false"
+                    android:text="Restart"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Game menu -->
+    <LinearLayout
+        android:id="@+id/letter_game_menu"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/letter_game_menu_background"
+        android:elevation="100dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="14dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/letter_game_menu_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/back_thin100"
+            app:tint="@color/letter_border_soft" />
+
+        <ImageView
+            android:id="@+id/letter_game_menu_play"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/play_outline100"
+            app:tint="@color/letter_border_soft" />
+
+        <ImageView
+            android:id="@+id/letter_game_menu_retry"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/retry100"
+            app:tint="@color/letter_border_soft" />
+    </LinearLayout>
+</FrameLayout>

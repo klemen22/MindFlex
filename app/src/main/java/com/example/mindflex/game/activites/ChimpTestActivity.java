@@ -1,9 +1,8 @@
 package com.example.mindflex.game.activites;
-
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -11,20 +10,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-
 import com.example.mindflex.HapticFeedbackManager;
 import com.example.mindflex.R;
 import com.example.mindflex.database.DailyActivityManager;
 import com.example.mindflex.database.HighScoreManager;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
 public class ChimpTestActivity extends AppCompatActivity {
 
     private GridLayout gridLayout;
@@ -51,15 +46,15 @@ public class ChimpTestActivity extends AppCompatActivity {
     private int round = 0;
     private int highScore = 0;
     private int index = 1;
-    private int rowsNum = 7;
-    private int colsNum = 4;
-    private int tileSize = 240;
+    private final int rowsNum = 7;
+    private final int colsNum = 4;
+    private final int tileSize = 240;
     private boolean input = false;
     private boolean gameFlag = false;
-    private ArrayList<Tile> tilesList = new ArrayList<>();
+    private final ArrayList<Tile> tilesList = new ArrayList<>();
 
 
-    private class Tile {
+    private static class Tile {
         int number;
         View view;
 
@@ -75,11 +70,8 @@ public class ChimpTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chimp_test);
-
-        // fix screen space
         View rootView = findViewById(android.R.id.content);
 
-        // for now bottom and top part of the screen space will be limited
         rootView.setOnApplyWindowInsetsListener((v, insets) -> {
             int topInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).top;
             int bottomInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).bottom;
@@ -87,40 +79,27 @@ public class ChimpTestActivity extends AppCompatActivity {
             return insets;
         });
 
-        // xml elements initialization \\
         chimpMenuButton = findViewById(R.id.chimp_game_menu_button);
         gridLayout = findViewById(R.id.chimp_test_grid);
         chimpOverlay = findViewById(R.id.chimp_overlay);
         chimpMain = findViewById(R.id.chimp_main_game_screen);
         chimpGameRound = findViewById(R.id.chimp_game_round);
-        // xml elements start screen
         chimpStartButton = findViewById(R.id.chimp_start_button);
         chimpStartScreen = findViewById(R.id.chimp_start);
-        // xml elements mid round screen
         chimpMidRound = findViewById(R.id.chimp_mid_round);
         chimpMidRoundNum = findViewById(R.id.chimp_mid_round_number);
         chimpMidRoundStrike = findViewById(R.id.chimp_mid_round_strikes);
         chimpMidRoundContinue = findViewById(R.id.chimp_mid_round_continue);
-        // xml elements game over screen
         chimpGameOver = findViewById(R.id.chimp_game_over);
         chimpGameOverScore = findViewById(R.id.chimp_game_over_score);
         chimpGameOverBack = findViewById(R.id.chimp_game_over_back);
         chimpGameOverRestart = findViewById(R.id.chimp_game_over_restart);
-        // xml elements game menu
         chimpGameMenu = findViewById(R.id.chimp_game_menu);
         chimpGameMenuBack = findViewById(R.id.chimp_game_menu_back);
         chimpGameMenuRestart = findViewById(R.id.chimp_game_menu_retry);
         chimpGameMenuPlay = findViewById(R.id.chimp_game_menu_play);
 
-        // get highscore
-        HighScoreManager.getHighScore(this, "Chimp Game", new HighScoreManager.HighScoreCallback() {
-            @Override
-            public void onResult(int score) {
-                runOnUiThread(() -> {
-                    highScore = score;
-                });
-            }
-        });
+        HighScoreManager.getHighScore(this, "Chimp Game", score -> runOnUiThread(() -> highScore = score));
 
         chimpStartButton.setOnClickListener(v -> {
             HapticFeedbackManager.HapticFeedbackLight(v);
@@ -133,7 +112,6 @@ public class ChimpTestActivity extends AppCompatActivity {
             rootView.postDelayed(this::startRound, 150);
         });
 
-        // menu button
         chimpMenuButton.setOnClickListener(v -> {
             if (!gameFlag) {
                 return;
@@ -176,9 +154,9 @@ public class ChimpTestActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void startRound() {
         if (round == 24) {
-            // failsafe if user reaches max number of tiles (max tilesNum is 28)
             GameOver(round + 4);
         }
         int tilesNum = round + 4;
@@ -187,7 +165,6 @@ public class ChimpTestActivity extends AppCompatActivity {
         gridLayout.setColumnCount(colsNum);
         chimpGameRound.setText("Round " + (round + 1));
 
-        // clear tiles
         gridLayout.removeAllViews();
         tilesList.clear();
 
@@ -197,7 +174,6 @@ public class ChimpTestActivity extends AppCompatActivity {
         }
         Collections.shuffle(numbers);
 
-        // first generate all tiles
         for (int i = 0; i < rowsNum; i++) {
             for (int j = 0; j < colsNum; j++) {
                 View tile = new View(this);
@@ -277,6 +253,7 @@ public class ChimpTestActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void MidRound(int tileNum) {
         View rootView = findViewById(android.R.id.content);
         input = false;
@@ -300,13 +277,11 @@ public class ChimpTestActivity extends AppCompatActivity {
         fadeIn(chimpGameOver, 300);
         fadeIn(chimpOverlay, 300);
 
-        // save highscore
         if (round + 4 > highScore) {
             highScore = round + 4;
             HighScoreManager.insertHighScore(this, "Chimp Game", highScore);
         }
 
-        // record played game
         DailyActivityManager.RecordGame(this, "Chimp Game");
 
         chimpGameOverScore.setText(String.valueOf(score));

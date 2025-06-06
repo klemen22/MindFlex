@@ -1,10 +1,10 @@
 package com.example.mindflex.game.activites;
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -12,33 +12,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-
 import com.example.mindflex.HapticFeedbackManager;
 import com.example.mindflex.R;
 import com.example.mindflex.database.DailyActivityManager;
 import com.example.mindflex.database.HighScoreManager;
-
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class SequenceMemoryGameActivity extends AppCompatActivity {
 
     private GridLayout gridLayout;
     private TextView scoreText;
-    private List<View> tiles = new ArrayList<>();
-    private int tileSize = 240;
+    private final List<View> tiles = new ArrayList<>();
+    private final int tileSize = 240;
     private int round = 0;
     private int highScore = 0;
 
-    private List<Integer> tilesSequence = new ArrayList<>();
+    private final List<Integer> tilesSequence = new ArrayList<>();
     private int currentIndex = 0;
 
     private boolean input = false;
@@ -56,6 +50,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
     private ImageView sequenceMenuRestart;
     private ImageView sequenceMenuButton;
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,22 +58,13 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sequence_memory_game);
 
-        // get highscore
-        HighScoreManager.getHighScore(this, "Sequence Game", new HighScoreManager.HighScoreCallback() {
-            @Override
-            public void onResult(int score) {
-                runOnUiThread(()->{
-                    highScore = score;
-                    Log.d("highscore", "Highscore: " + highScore);
-                });
-            }
-        });
+        HighScoreManager.getHighScore(this, "Sequence Game", score -> runOnUiThread(()->{
+            highScore = score;
+            Log.d("highscore", "Highscore: " + highScore);
+        }));
 
-
-        //fix screen space
         View rootView = findViewById(android.R.id.content);
 
-        // for now bottom and top part of the screen space will be limited
         rootView.setOnApplyWindowInsetsListener((v, insets) -> {
             int topInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).top;
             int bottomInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).bottom;
@@ -86,7 +72,6 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             return insets;
         });
 
-        // xml elements initialization
         gridLayout = findViewById(R.id.sequence_game_grid);
         scoreText = findViewById(R.id.sequence_game_score);
         startScreen = findViewById(R.id.sequence_start);
@@ -97,7 +82,6 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
         overlay = findViewById(R.id.sequence_overlay);
         sequenceMain = findViewById(R.id.sequence_game_main);
 
-        // xml elements menu
         sequenceMenu = findViewById(R.id.sequence_game_menu);
         sequenceMenuBack = findViewById(R.id.sequence_game_menu_back_button);
         sequenceMenuPlay = findViewById(R.id.sequence_game_menu_play_button);
@@ -157,7 +141,6 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
 
         });
 
-        // create tiles
         for (int i = 0; i < 16; i++){
             View tile = new View(this);
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
@@ -170,18 +153,16 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
 
             final int index = i;
             tile.setOnClickListener(v -> {
-                if(input == false){
+                if(!input){
                     return;
                 }
                 HapticFeedbackManager.HapticFeedbackStrong(v);
 
-                // case of correct click
                 if(index == tilesSequence.get(currentIndex)){
                     tile.animate().alpha(1f).setDuration(200).withEndAction(()->tile.setBackgroundResource(R.drawable.sequence_tile_background_correct)).start();
 
                     currentIndex++;
 
-                    // round completed
                     if(currentIndex == tilesSequence.size()){
                         round++;
                         scoreText.setText("Level: "+ (round + 1));
@@ -189,19 +170,16 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
                     }
 
                 }
-                // case of incorrect click
                 else{
                     tile.animate().alpha(1f).setDuration(200).withEndAction(()->tile.setBackgroundResource(R.drawable.sequence_tile_background_error)).start();
                     input = false;
                     gameOverScreen.setVisibility(View.VISIBLE);
                     overlay.setVisibility(View.VISIBLE);
 
-                    //save high score
                     if (round > highScore){
                         HighScoreManager.insertHighScore(this, "Sequence Game", round);
                     }
 
-                    // record played game
                     DailyActivityManager.RecordGame(this,"Sequence Game");
 
                     retryButton.setOnClickListener(v1 -> {
@@ -229,7 +207,6 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
 
     }
     private void startRound(){
-        // reset tiles
         for(View tile : tiles){
             tile.setBackgroundResource(R.drawable.sequence_tile_background);
         }
@@ -263,20 +240,18 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
                 tile.setAlpha(0f);
                 tile.animate().alpha(1f).setDuration(200).start();
                 tile.setBackgroundResource(R.drawable.sequence_tile_background_correct);
-            }, i * 800);
+            }, i * 800L);
 
             int finalI = i;
             tile.postDelayed(()->{
                 tile.setAlpha(1f);
                 tile.animate().alpha(0f).setDuration(200).start();
-                tile.animate().alpha(1f).setDuration(200).withEndAction(()->{
-                    tile.setBackgroundResource(R.drawable.sequence_tile_background);
-                }).start();
+                tile.animate().alpha(1f).setDuration(200).withEndAction(()-> tile.setBackgroundResource(R.drawable.sequence_tile_background)).start();
 
                 if(finalI == tilesSequence.size() - 1){
                     input = true;
                 }
-            }, i * 800 + 800);
+            }, i * 800L + 800);
 
         }
     }

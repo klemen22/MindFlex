@@ -1,5 +1,5 @@
 package com.example.mindflex.game.activites;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,23 +13,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import android.animation.ValueAnimator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-
 import com.example.mindflex.HapticFeedbackManager;
 import com.example.mindflex.R;
 import com.example.mindflex.database.DailyActivityManager;
 import com.example.mindflex.database.HighScoreManager;
-
 import java.util.Random;
 
 public class NumberGameActivity extends AppCompatActivity {
@@ -61,23 +56,21 @@ public class NumberGameActivity extends AppCompatActivity {
 
     private int level = 1;
     private String currentNumber = "";
-    private Handler handler = new Handler(Looper.getMainLooper());
-    private Random random = new Random();
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private final Random random = new Random();
     private int highScore = 0;
     InputMethodManager imm;
     View rootView;
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_number_game);
-
-        // fix screen space
         rootView = findViewById(android.R.id.content);
 
-        // for now bottom and top part of the screen space will be limited
         rootView.setOnApplyWindowInsetsListener((v, insets) -> {
             int topInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).top;
             int bottomInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).bottom;
@@ -87,7 +80,6 @@ public class NumberGameActivity extends AppCompatActivity {
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        // Views
         timerBar = findViewById(R.id.number_timer_bar);
         startScreen = findViewById(R.id.number_start);
         overlay = findViewById(R.id.number_overlay);
@@ -99,24 +91,20 @@ public class NumberGameActivity extends AppCompatActivity {
         startButton = findViewById(R.id.number_start_button);
         submitButton = findViewById(R.id.number_submit);
 
-        //
         numberGameOverScreen = findViewById(R.id.number_game_over);
         numberGameOverScore = findViewById(R.id.number_game_over_score);
         numberGameOverBack = findViewById(R.id.number_game_over_back);
         numberGameOverRetry = findViewById(R.id.number_game_over_restart);
         numberGameOverText = findViewById(R.id.number_game_over_text);
-        //
         numberGameMenuButton = findViewById(R.id.number_game_menu_button);
         numberGameMenu = findViewById(R.id.number_game_menu);
         numberGameMenuBack = findViewById(R.id.number_game_menu_back);
         numberGameMenuPlay = findViewById(R.id.number_game_menu_play);
         numberGameMenuRestart = findViewById(R.id.number_game_menu_retry);
-        //
         numberMainScreen = findViewById(R.id.number_main_screen);
 
         TextView highscoreText = findViewById(R.id.number_game_highscore);
 
-        // Get high score
         HighScoreManager.getHighScore(this, "Number Game", score -> {
             highScore = score;
             highscoreText.setText("Highscore: " + highScore);
@@ -146,7 +134,6 @@ public class NumberGameActivity extends AppCompatActivity {
             }
         });
 
-        // menu buttons
         numberGameMenuButton.setOnClickListener(v->{
             HapticFeedbackManager.HapticFeedbackLight(v);
             enableInputs(false);
@@ -192,6 +179,7 @@ public class NumberGameActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void startRound() {
         inputField.setText("");
         inputField.setVisibility(View.GONE);
@@ -206,13 +194,11 @@ public class NumberGameActivity extends AppCompatActivity {
 
         displayText.setVisibility(View.VISIBLE);
 
-        // Show number then hide and prompt input
         int displayTime = 1000 + (level * 800);
         timerBar.setVisibility(View.VISIBLE);
         timerBar.setMax(1000);
         timerBar.setProgress(1000);
 
-        // Cancel previous animator if running
         if (timerAnimator != null && timerAnimator.isRunning()) {
             timerAnimator.cancel();
         }
@@ -238,6 +224,7 @@ public class NumberGameActivity extends AppCompatActivity {
         }, displayTime);
     }
 
+    @SuppressLint("SetTextI18n")
     private void showGameOver(String userInput) {
 
         fadeIn(numberGameOverScreen, 300);
@@ -249,12 +236,10 @@ public class NumberGameActivity extends AppCompatActivity {
         numberGameOverText.setText("Wrong! Correct was: " + currentNumber);
         numberGameOverScore.setText("You entered: " + userInput + "\nFinal Score: " + (level - 1));
 
-        // Save score
         if (level - 1 > highScore) {
             HighScoreManager.insertHighScore(this, "Number Game", level - 1);
         }
 
-        // Record game
         DailyActivityManager.RecordGame(this, "Number Game");
 
         numberGameOverBack.setOnClickListener(v->{

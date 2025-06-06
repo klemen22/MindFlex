@@ -1,4 +1,5 @@
 package com.example.mindflex;
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder> {
 
-    private List<ScoreItem> scoreItems;
+    private final List<ScoreItem> scoreItems;
 
     public static class ScoreViewHolder extends RecyclerView.ViewHolder{
         TextView textView_game, textView_score;
@@ -32,8 +33,9 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ScoreViewHol
         return new ScoreViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(ScoreViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull ScoreViewHolder holder, int position){
         ScoreItem item = scoreItems.get(position);
         String gameID = item.gameID;
         String displayScore = String.valueOf(item.score);

@@ -1,13 +1,12 @@
 package com.example.mindflex;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -17,17 +16,13 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.slider.Slider;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private TextView musicTitlePrint;
     private Slider volumeSlider;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch hapticSwitch;
 
     SharedPreferences preferences;
@@ -59,10 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_settings);
 
-        //fix screen space
         View rootView = findViewById(android.R.id.content);
-
-        // for now bottom and top part of the screen space will be limited
         rootView.setOnApplyWindowInsetsListener((v, insets) -> {
             int topInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).top;
             int bottomInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).bottom;
@@ -70,7 +63,6 @@ public class SettingsActivity extends AppCompatActivity {
             return insets;
         });
 
-        //drawer setup
         drawerLayout = findViewById(R.id.settings_drawer_layout);
         navigationView = findViewById(R.id.settings_navigation_view);
         drawerMenuButton = findViewById(R.id.settings_drawer_menu_button);
@@ -117,9 +109,8 @@ public class SettingsActivity extends AppCompatActivity {
             if (id == R.id.drawer_home) {
                 Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
                 startActivity(intent);
-            } else if (id == R.id.drawer_settings) {
-                // yes
-            } else if (id == R.id.drawer_about) {
+            }
+            if (id == R.id.drawer_about) {
                 Toast.makeText(this, "It just works!", Toast.LENGTH_SHORT).show();
             }
 
@@ -134,7 +125,6 @@ public class SettingsActivity extends AppCompatActivity {
         volumeSlider = findViewById(R.id.settings_volume_slider);
         hapticSwitch = findViewById(R.id.settings_haptic_toggle);
 
-        // music settings
         preferences = getSharedPreferences("app_settings", MODE_PRIVATE);
         String savedMusic = preferences.getString("music_key", "Souls of fire");
         musicIndex = musicTitles.indexOf(savedMusic);
@@ -146,7 +136,6 @@ public class SettingsActivity extends AppCompatActivity {
             musicIndex = 0;
         }
 
-        // print out current music
         musicTitlePrint.setText(musicTitles.get(musicIndex));
 
         musicArrowLeft.setOnClickListener(v -> {
@@ -162,7 +151,6 @@ public class SettingsActivity extends AppCompatActivity {
             preferences.edit().putFloat("volume_key", value / 100f).apply();
         });
 
-        // haptics settings
         boolean hapticEnabled = preferences.getBoolean("haptic_key", true);
         hapticSwitch.setChecked(hapticEnabled);
 

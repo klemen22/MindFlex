@@ -1,5 +1,4 @@
 package com.example.mindflex;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -9,23 +8,19 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class TileAdapter extends RecyclerView.Adapter<TileAdapter.TileViewHolder> {
 
-    private List<GameItem> game_list;
+    private final List<GameItem> game_list;
     private int expandedPosition = -1;
 
     public TileAdapter(List<GameItem> game_list) {
@@ -44,28 +39,23 @@ public class TileAdapter extends RecyclerView.Adapter<TileAdapter.TileViewHolder
     public void onBindViewHolder(@NonNull TileAdapter.TileViewHolder holder, @SuppressLint("RecyclerView") int position) {
         GameItem current_game = game_list.get(position);
 
-        // set the title, image, and description
         holder.game_title.setText(current_game.getTitle());
         holder.game_image.setImageResource(current_game.getImage_resource());
         holder.game_description.setText(current_game.getDescription());
 
-        // get background drawable
         Drawable backgroundDrawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.tile_background);
 
-        // change background color
         if (current_game.getBackgroundColor() != 0) {
             assert backgroundDrawable != null;
             backgroundDrawable.setTint(current_game.getBackgroundColor());
         }
 
-        // chnage button background color
         if (current_game.getButtonBackgroundColor() != 0) {
             holder.play_button.setBackgroundColor(current_game.getButtonBackgroundColor());
         }
 
         holder.itemView.setBackground(backgroundDrawable);
 
-        // logic for expanding or collapsing the tile
         final boolean isExpanded = position == expandedPosition;
 
 
@@ -79,11 +69,11 @@ public class TileAdapter extends RecyclerView.Adapter<TileAdapter.TileViewHolder
 
         holder.itemView.setOnClickListener(v -> {
             if (isExpanded) {
-                expandedPosition = -1; // Collapse
+                expandedPosition = -1;
                 notifyItemChanged(position);
             } else {
                 int prevExpandedPosition = expandedPosition;
-                expandedPosition = position; // Expand
+                expandedPosition = position;
                 notifyItemChanged(prevExpandedPosition);
                 notifyItemChanged(expandedPosition);
                 RecyclerView recyclerView = (RecyclerView) holder.itemView.getParent();
@@ -124,11 +114,11 @@ public class TileAdapter extends RecyclerView.Adapter<TileAdapter.TileViewHolder
     }
 
     public static class TileViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout expanded_layout;
-        private CardView layout_parent;
+        private final LinearLayout expanded_layout;
+        private final CardView layout_parent;
 
-        private TextView game_description;
-        private Button play_button;
+        private final TextView game_description;
+        private final Button play_button;
         public TextView game_title;
         public ImageView game_image;
 

@@ -1,9 +1,9 @@
 package com.example.mindflex.game.activites;
-
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.Toast.*;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,7 +13,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
-import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,18 +20,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-
 import com.example.mindflex.HapticFeedbackManager;
 import com.example.mindflex.R;
 import com.example.mindflex.database.DailyActivityManager;
 import com.example.mindflex.database.HighScoreManager;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,7 +62,7 @@ public class TypingGameActivity extends AppCompatActivity {
     private long totalPauseTime = 0;
     private boolean timerRunning = false;
     private boolean wasTimerRunning = false;
-    private android.os.Handler timerHandler = new android.os.Handler();
+    private final android.os.Handler timerHandler = new android.os.Handler();
     private Runnable timerRunnable;
     private int wpm = 0;
     private int wordCount = 0;
@@ -82,10 +78,8 @@ public class TypingGameActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_typing_game);
 
-        // fix screen space
         View rootView = findViewById(android.R.id.content);
 
-        // for now bottom and top part of the screen space will be limited
         rootView.setOnApplyWindowInsetsListener((v, insets) -> {
             int topInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).top;
             int bottomInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).bottom;
@@ -93,45 +87,27 @@ public class TypingGameActivity extends AppCompatActivity {
             return insets;
         });
 
-        // xml elements initialization \\
         typeMenuButton = findViewById(R.id.type_game_menu_button);
         typeOverlay = findViewById(R.id.type_overlay);
         typeRound = findViewById(R.id.type_game_round);
-        // xml elements start screen
         typeStartButton = findViewById(R.id.type_start_button);
         typeStartScreen = findViewById(R.id.type_game_start_screen);
-        // xml elements main screen
         typeMain = findViewById(R.id.type_game_main);
         typeTextBox = findViewById(R.id.type_game_text);
         typeInput = findViewById(R.id.type_game_input);
         typeTime = findViewById(R.id.type_game_time);
         typeWPM = findViewById(R.id.type_game_wpm);
-        // xml elements menu
         typeMenu = findViewById(R.id.type_game_menu);
         typeGameMenuBackButton = findViewById(R.id.type_game_menu_back_button);
         typeGameMenuPlayButton = findViewById(R.id.type_game_menu_play_button);
         typeGameMenuRestartButton = findViewById(R.id.type_game_menu_retry_button);
 
-        // get highscore
-        HighScoreManager.getHighScore(this, "Typing Game", new HighScoreManager.HighScoreCallback() {
-            @Override
-            public void onResult(int score) {
-                runOnUiThread(() -> {
-                    highScore = score;
-                });
-            }
-        });
+        HighScoreManager.getHighScore(this, "Typing Game", score -> runOnUiThread(() -> highScore = score));
 
-        // load sentences
         sentences = loadSentences("sentences1.txt");
-
-        // disable input
         typeInput.setEnabled(false);
-
-        // disable suggestions and auto correct (hack)
         typeInput.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
-        // menu button
         typeMenuButton.setOnClickListener(v -> {
             if (!testFlag) {
                 return;
@@ -213,10 +189,10 @@ public class TypingGameActivity extends AppCompatActivity {
         });
 
         timerRunnable = new Runnable() {
+            @SuppressLint({"DefaultLocale", "SetTextI18n"})
             @Override
             public void run() {
                 if (timerRunning) {
-                    // TODO: fix WPM counter value jumping up at the start of the sentence :(
                     long millis = System.currentTimeMillis() - startTime - totalPauseTime;
                     int seconds = (int) (millis / 1000);
                     int minutes = seconds / 60;
@@ -238,6 +214,7 @@ public class TypingGameActivity extends AppCompatActivity {
         };
     }
 
+    @SuppressLint("SetTextI18n")
     private void startRound() {
         if (sentences.isEmpty()) {
             Toast.makeText(this, "Sentences are not available", LENGTH_SHORT).show();
@@ -286,8 +263,6 @@ public class TypingGameActivity extends AppCompatActivity {
             testFlag = false;
             timerRunning = false;
             Toast.makeText(this, "Starting next round", LENGTH_SHORT).show();
-
-            // record played game
             DailyActivityManager.RecordGame(this, "Typing Game");
 
             rootView.postDelayed(this::startRound, 500);

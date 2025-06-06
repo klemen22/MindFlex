@@ -1,4 +1,5 @@
 package com.example.mindflex;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -23,10 +24,10 @@ import java.util.concurrent.Executors;
 
 public class StatsScreenActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private List<ScoreItem> scoreItemList = new ArrayList<>();
+    private final List<ScoreItem> scoreItemList = new ArrayList<>();
     private ScoreAdapter scoreAdapter;
 
-    private static final String[] game_ids = {"Chimp Game", "Letter Game", "Number Game",
+    private static final String[] game_ids = {"Chimp Game", "Verbal Game", "Number Game",
             "Reaction Game", "Sequence Game", "Typing Game"};
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -37,10 +38,8 @@ public class StatsScreenActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_stats_screen);
 
-        //fix screen space
         View rootView = findViewById(android.R.id.content);
 
-        // for now bottom and top part of the screen space will be limited
         rootView.setOnApplyWindowInsetsListener((v, insets) -> {
             int topInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).top;
             int bottomInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).bottom;
@@ -72,6 +71,7 @@ public class StatsScreenActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void loadData() {
         executorService.execute(() -> {
             AppDatabase appDatabase = AppDatabase.getInstance(this);

@@ -48,7 +48,7 @@ public class DailyScreenActivity extends AppCompatActivity {
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    private static final String[] game_ids = {"Chimp Game", "Letter Game", "Number Game",
+    private static final String[] game_ids = {"Chimp Game", "Verbal Game", "Number Game",
             "Reaction Game", "Sequence Game", "Typing Game"};
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -58,10 +58,8 @@ public class DailyScreenActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_daily_screen);
 
-        //fix screen space
         View rootView = findViewById(android.R.id.content);
 
-        // for now bottom and top part of the screen space will be limited
         rootView.setOnApplyWindowInsetsListener((v, insets) -> {
             int topInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).top;
             int bottomInset = insets.getInsets(android.view.WindowInsets.Type.systemBars()).bottom;
@@ -69,7 +67,6 @@ public class DailyScreenActivity extends AppCompatActivity {
             return insets;
         });
 
-        // load weekly chart
         barChart = findViewById(R.id.weekly_chart);
         loadChartData();
 
@@ -97,56 +94,49 @@ public class DailyScreenActivity extends AppCompatActivity {
             updateWeek();
         });
 
-        dateRange.setOnClickListener(v->{
-            datePicker();
-        });
+        dateRange.setOnClickListener(v-> datePicker());
 
-        // update date placeholder
         updateWeek();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadChartData() {
-        executorService.execute(() -> {
-            DailyActivityManager.getAllGamesActivities(this, activities -> {
-                Map<LocalDate, float[]> localDateMap = new HashMap<>();
+        executorService.execute(() -> DailyActivityManager.getAllGamesActivities(this, activities -> {
+            Map<LocalDate, float[]> localDateMap = new HashMap<>();
 
-                for (com.example.mindflex.database.DailyActivity dailyActivity : activities) {
-                    LocalDate date = LocalDate.parse(dailyActivity.date);
-                    float[] gameCount = localDateMap.getOrDefault(date, new float[6]);
+            for (com.example.mindflex.database.DailyActivity dailyActivity : activities) {
+                LocalDate date = LocalDate.parse(dailyActivity.date);
+                float[] gameCount = localDateMap.getOrDefault(date, new float[6]);
 
-                    int index = getGameIndex(dailyActivity.gameID);
-                    if (index != -1) {
-                        assert gameCount != null;
-                        gameCount[index] += dailyActivity.timesPlayed;
-                        localDateMap.put(date, gameCount);
-                    }
+                int index = getGameIndex(dailyActivity.gameID);
+                if (index != -1) {
+                    assert gameCount != null;
+                    gameCount[index] += dailyActivity.timesPlayed;
+                    localDateMap.put(date, gameCount);
                 }
+            }
 
-                Log.d("ChartData", "Total activities received: " + activities.size());
-                for (com.example.mindflex.database.DailyActivity a : activities) {
-                    Log.d("ChartData", "Activity: " + a.gameID + " | " + a.date + " | Times: " + a.timesPlayed);
-                }
+            Log.d("ChartData", "Total activities received: " + activities.size());
+            for (com.example.mindflex.database.DailyActivity a : activities) {
+                Log.d("ChartData", "Activity: " + a.gameID + " | " + a.date + " | Times: " + a.timesPlayed);
+            }
 
-                List<BarEntry> entries = new ArrayList<>();
-                List<float[]> finalData = new ArrayList<>();
-                LocalDate today = LocalDate.now();
+            List<BarEntry> entries = new ArrayList<>();
+            List<float[]> finalData = new ArrayList<>();
+            LocalDate today = LocalDate.now();
 
-                LocalDate startDate = startOfTheWeek;
-                for (int i = 0; i < 7; i++) {
-                    LocalDate date = startDate.plusDays(i);
-                    float[] values = localDateMap.getOrDefault(date, new float[6]);
-                    entries.add(new BarEntry(i, values));
-                    finalData.add(values);
-                }
+            LocalDate startDate = startOfTheWeek;
+            for (int i = 0; i < 7; i++) {
+                LocalDate date = startDate.plusDays(i);
+                float[] values = localDateMap.getOrDefault(date, new float[6]);
+                entries.add(new BarEntry(i, values));
+                finalData.add(values);
+            }
 
 
-                runOnUiThread(() -> updateChart(entries, finalData));
-            });
-        });
+            runOnUiThread(() -> updateChart(entries, finalData));
+        }));
     }
-
-    // update chart helper function
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateChart(List<BarEntry> barEntries, List<float[]> inputData) {
@@ -157,16 +147,14 @@ public class DailyScreenActivity extends AppCompatActivity {
         Log.d("DebugData", "barDataSet" + barDataSet);
 
         barDataSet.setColors(
-                ContextCompat.getColor(this, R.color.chimp_main),     // Chimp Game
-                ContextCompat.getColor(this, R.color.green),          // Letter Game
-                ContextCompat.getColor(this, R.color.number_main),    // Number Mame
-                ContextCompat.getColor(this, R.color.reaction_main),  // Reaction Game
-                ContextCompat.getColor(this, R.color.sequence_main),  // Sequence Game
-                ContextCompat.getColor(this, R.color.type_main)       // Typing Game
+                ContextCompat.getColor(this, R.color.chimp_main),
+                ContextCompat.getColor(this, R.color.green),
+                ContextCompat.getColor(this, R.color.number_main),
+                ContextCompat.getColor(this, R.color.reaction_main),
+                ContextCompat.getColor(this, R.color.sequence_main),
+                ContextCompat.getColor(this, R.color.type_main)
         );
 
-
-        // be careful with order!!
         barDataSet.setStackLabels(new String[]{
                 "Chimp Game", "Letter Game", "Number Game",
                 "Reaction Game", "Sequence Game", "Typing Game"
@@ -178,7 +166,6 @@ public class DailyScreenActivity extends AppCompatActivity {
         barData.setBarWidth(0.8f);
         barChart.setData(barData);
 
-        // disable barChart interaction
         barChart.setTouchEnabled(true);
         barChart.setDragEnabled(false);
         barChart.setScaleEnabled(false);
@@ -186,7 +173,6 @@ public class DailyScreenActivity extends AppCompatActivity {
         barChart.setDoubleTapToZoomEnabled(false);
         barChart.setHighlightPerDragEnabled(false);
 
-        // X-axis setup
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
@@ -209,7 +195,6 @@ public class DailyScreenActivity extends AppCompatActivity {
             }
         });
 
-        // Y-axis setup
         YAxis yAxis = barChart.getAxisLeft();
         YAxis yAxisRight = barChart.getAxisRight();
         yAxisRight.setEnabled(false);
@@ -220,7 +205,6 @@ public class DailyScreenActivity extends AppCompatActivity {
         legend.setEnabled(false);
         description.setEnabled(false);
 
-        // graph listener
         barChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
@@ -255,27 +239,16 @@ public class DailyScreenActivity extends AppCompatActivity {
         barChart.invalidate();
     }
 
-    // helper function for shifting days
-    @RequiresApi(api = Build.VERSION_CODES.O)
     List<String> getShiftedWeekLabels() {
-        List<String> allDays = Arrays.asList("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
-        DayOfWeek today = LocalDate.now().getDayOfWeek();
-        int todayIndex = today.getValue() - 1;
-        List<String> shifted = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            shifted.add(allDays.get((todayIndex + i - 6 + 7) % 7));
-        }
-        return shifted;
+        return Arrays.asList("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
     }
 
-    // helper function for getting game index
     private int getGameIndex(String gameID) {
         for (int i = 0; i < game_ids.length; i++) {
             if (game_ids[i].equals(gameID)) {
                 return i;
             }
         }
-        // return something dumb
         return -1;
     }
 

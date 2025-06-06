@@ -3,7 +3,6 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-// Class for high score table
 @Entity(tableName = "HighScore")
 public class HighScore {
     @PrimaryKey

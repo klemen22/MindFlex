@@ -8,7 +8,6 @@ import java.util.concurrent.Executors;
 public class HighScoreManager {
     private static final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    // helper function for inserting score
     public static void insertHighScore(Context context, String gameID, int score){
         executorService.execute(()->{
             AppDatabase appDatabase = AppDatabase.getInstance(context);
@@ -17,7 +16,6 @@ public class HighScoreManager {
         });
     }
 
-    // helper function for reading score
     public static void getHighScore(Context context, String gameID, HighScoreCallback callback){
         executorService.execute(()->{
             AppDatabase appDatabase = AppDatabase.getInstance(context);

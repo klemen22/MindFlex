@@ -89,5 +89,14 @@
     <color name="number_light_text">#FFFFFF</color>
     <color name="number_border_soft">#FFD199</color>
 
+    <!-- Letter game colors -->
+    <color name="letter_main">#0ED00E</color>
+    <color name="letter_background">#E4FBE4</color>
+    <color name="letter_background_dark">#0AA60A</color>
+    <color name="letter_highlight">#D3F7D3</color>
+    <color name="letter_highlight_dark">#AEECAE</color>
+    <color name="letter_text_primary">#2E2E2E</color>
+    <color name="letter_light_text">#FFFFFF</color>
+    <color name="letter_border_soft">#A3E6A3</color>
 
 </resources>

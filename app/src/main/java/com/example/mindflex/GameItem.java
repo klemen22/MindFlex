@@ -3,13 +3,13 @@ package com.example.mindflex;
 public class GameItem {
 
 
-    private String title;
-    private String description;
-    private int image_resource;
-    private int backgroundColor;
-    private int buttonBackgroundColor;
+    private final String title;
+    private final String description;
+    private final int image_resource;
+    private final int backgroundColor;
+    private final int buttonBackgroundColor;
 
-    private Class<?> targetActivity;
+    private final Class<?> targetActivity;
 
 
     public GameItem(String title, int image_resource, int backgroundColor, int buttonBackgroundColor, String description, Class<?> targetActivity) {
