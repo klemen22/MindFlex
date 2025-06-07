@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".game.activites.TypingGameActivity">
+    tools:context=".game.activities.TypingGameActivity">
 
     <View
         android:id="@+id/type_overlay"
@@ -14,7 +14,6 @@
         android:elevation="100dp"
         android:visibility="visible" />
 
-    <!-- Start screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/type_game_start_screen"
         android:layout_width="300dp"
@@ -42,7 +41,8 @@
                 android:includeFontPadding="false"
                 android:text="Typing game"
                 android:textColor="@color/type_text_primary"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/type_start_button"
@@ -54,12 +54,11 @@
                 android:paddingVertical="12dp"
                 android:text="Start"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-
-    <!-- Main game screen -->
     <LinearLayout
         android:id="@+id/type_game_main"
         android:layout_width="match_parent"
@@ -79,7 +78,8 @@
             android:includeFontPadding="false"
             android:text="Round 1"
             android:textColor="@color/type_text_primary"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,7 +97,8 @@
                 android:gravity="center"
                 android:text="Time: 00:00"
                 android:textColor="@color/type_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/type_game_wpm"
@@ -108,7 +109,8 @@
                 android:gravity="center"
                 android:text="WPM: 0"
                 android:textColor="@color/type_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <View
@@ -163,7 +165,8 @@
                     android:singleLine="false"
                     android:textColor="@color/type_text_primary"
                     android:textColorHint="@color/type_text_primary"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:ignore="Autofill,HardcodedText,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
             </LinearLayout>
         </LinearLayout>
@@ -183,12 +186,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tint="@color/type_border_soft" />
+                app:tint="@color/type_border_soft"
+                tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <!-- Game menu -->
     <LinearLayout
         android:id="@+id/type_game_menu"
         android:layout_width="match_parent"
@@ -209,7 +212,8 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/back_thin100"
-            app:tint="@color/type_border_soft" />
+            app:tint="@color/type_border_soft"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/type_game_menu_play_button"
@@ -219,7 +223,8 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/play_outline100"
-            app:tint="@color/type_border_soft" />
+            app:tint="@color/type_border_soft"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/type_game_menu_retry_button"
@@ -229,6 +234,7 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/retry100"
-            app:tint="@color/type_border_soft" />
+            app:tint="@color/type_border_soft"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </FrameLayout>

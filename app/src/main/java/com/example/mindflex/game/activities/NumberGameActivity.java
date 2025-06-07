@@ -1,4 +1,4 @@
-package com.example.mindflex.game.activites;
+package com.example.mindflex.game.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;

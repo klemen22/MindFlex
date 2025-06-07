@@ -20,12 +20,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mindflex.database.ScoreInitialize;
-import com.example.mindflex.game.activites.ChimpTestActivity;
-import com.example.mindflex.game.activites.LetterGameActivity;
-import com.example.mindflex.game.activites.NumberGameActivity;
-import com.example.mindflex.game.activites.ReactionGameActivity;
-import com.example.mindflex.game.activites.SequenceMemoryGameActivity;
-import com.example.mindflex.game.activites.TypingGameActivity;
+import com.example.mindflex.game.activities.ChimpTestActivity;
+import com.example.mindflex.game.activities.LetterGameActivity;
+import com.example.mindflex.game.activities.NumberGameActivity;
+import com.example.mindflex.game.activities.ReactionGameActivity;
+import com.example.mindflex.game.activities.SequenceMemoryGameActivity;
+import com.example.mindflex.game.activities.TypingGameActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/reaction_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,7 +17,6 @@
         android:elevation="100dp"
         android:visibility="visible" />
 
-    <!-- Start screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/reaction_start"
         android:layout_width="300dp"
@@ -43,7 +43,8 @@
                 android:fontFamily="@font/rajdhani_semibold"
                 android:text="Reaction Test"
                 android:textColor="@color/reaction_text_primary"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/reaction_start_button"
@@ -55,11 +56,11 @@
                 android:fontFamily="@font/rajdhani_regular"
                 android:text="Start"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Game screen -->
     <LinearLayout
         android:id="@+id/reaction_game_screen"
         android:layout_width="match_parent"
@@ -76,11 +77,11 @@
             android:text="Wait for green..."
             android:textSize="28sp"
             android:textColor="@color/reaction_text_primary"
-            android:fontFamily="@font/rajdhani_medium" />
+            android:fontFamily="@font/rajdhani_medium"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 
-    <!-- Game over screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/reaction_game_over"
         android:layout_width="300dp"
@@ -109,7 +110,8 @@
                 android:includeFontPadding="false"
                 android:text="Reaction time"
                 android:textColor="@color/chimp_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/reaction_game_over_time"
@@ -120,7 +122,8 @@
                 android:includeFontPadding="false"
                 android:text="100ms"
                 android:textColor="@color/reaction_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,7 +142,8 @@
                     android:text="Back"
                     android:backgroundTint="@color/reaction_main"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
                 <Button
                     android:id="@+id/reaction_game_over_restart"
@@ -151,7 +155,8 @@
                     android:backgroundTint="@color/reaction_main"
                     android:text="Retry"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
             </LinearLayout>
         </LinearLayout>

@@ -1,76 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tile_layout_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:animateLayoutChanges="true"
+    android:clickable="true"
     android:focusable="true"
     android:radius="14dp"
     app:cardCornerRadius="14dp"
-    app:cardElevation="4dp"
-    android:clickable="true"
-    android:animateLayoutChanges="true"
-    android:id="@+id/tile_layout_parent">
+    app:cardElevation="4dp">
 
     <LinearLayout
+        android:id="@+id/tile_layout_middle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
         android:gravity="center"
-        android:id="@+id/tile_layout_middle">
+        android:orientation="vertical"
+        android:padding="10dp">
 
 
         <ImageView
             android:id="@+id/game_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="@android:color/transparent"
             android:src="@drawable/place_holder2"
-            android:background="@android:color/transparent" />
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/game_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Game"
-            android:textSize="18sp"
             android:textColor="@android:color/white"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
 
-        <!-- hidden part of the tile -->
         <LinearLayout
             android:id="@+id/expanded_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
             android:orientation="vertical"
             android:paddingTop="10dp"
             android:paddingBottom="4dp"
-            android:layout_gravity="start"
             android:visibility="gone">
 
             <TextView
                 android:id="@+id/game_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Game description placeholder"
                 android:fontFamily="@font/rajdhani_regular"
-                android:textColor="@color/white"
                 android:includeFontPadding="false"
-                android:textSize="18sp"/>
-
-            <!-- Placeholder button -->
+                android:text="Game description placeholder"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/play_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Play"
-                android:fontFamily="@font/rajdhani_semibold"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/black"
                 android:layout_gravity="end"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="@color/black"
+                android:fontFamily="@font/rajdhani_semibold"
+                android:text="Play"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:layout_marginTop="6dp"/>
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
     </LinearLayout>

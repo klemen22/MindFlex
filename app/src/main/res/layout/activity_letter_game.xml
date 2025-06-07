@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/letter_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,7 +17,6 @@
         android:elevation="100dp"
         android:visibility="visible" />
 
-    <!-- Start screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/letter_start"
         android:layout_width="300dp"
@@ -43,7 +43,8 @@
                 android:fontFamily="@font/rajdhani_semibold"
                 android:text="Verbal Memory"
                 android:textColor="@color/letter_text_primary"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/letter_game_highscore"
@@ -53,7 +54,8 @@
                 android:fontFamily="@font/rajdhani_regular"
                 android:text="Highscore: 0"
                 android:textColor="@color/letter_text_primary"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/letter_start_button"
@@ -64,11 +66,11 @@
                 android:fontFamily="@font/rajdhani_regular"
                 android:text="Start"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Game screen -->
     <LinearLayout
         android:id="@+id/letter_game_screen"
         android:layout_width="match_parent"
@@ -78,7 +80,6 @@
         android:padding="24dp"
         android:visibility="gone">
 
-        <!-- Score + Lives -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +94,8 @@
                 android:fontFamily="@font/rajdhani_medium"
                 android:text="Lives | 3"
                 android:textColor="@color/letter_text_primary"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/letter_score_text"
@@ -102,10 +104,10 @@
                 android:fontFamily="@font/rajdhani_medium"
                 android:text="Score | 0"
                 android:textColor="@color/letter_text_primary"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <!-- Word Display -->
         <TextView
             android:id="@+id/letter_word"
             android:layout_width="wrap_content"
@@ -114,9 +116,9 @@
             android:fontFamily="@font/rajdhani_bold"
             android:text="word"
             android:textColor="@color/letter_text_primary"
-            android:textSize="32sp" />
+            android:textSize="32sp"
+            tools:ignore="HardcodedText" />
 
-        <!-- Buttons -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -132,7 +134,8 @@
                 android:fontFamily="@font/rajdhani_semibold"
                 android:text="SEEN"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
                 android:id="@+id/letter_button_new"
@@ -142,7 +145,8 @@
                 android:fontFamily="@font/rajdhani_semibold"
                 android:text="NEW"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="ButtonStyle,HardcodedText" />
         </LinearLayout>
     </LinearLayout>
 
@@ -162,10 +166,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:tint="@color/letter_border_soft" />
+            app:tint="@color/letter_border_soft"
+            tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Game over screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/letter_game_over"
         android:layout_width="300dp"
@@ -193,7 +197,8 @@
                 android:includeFontPadding="false"
                 android:text="Game Over!\nScore"
                 android:textColor="@color/letter_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/letter_game_over_score"
@@ -204,7 +209,8 @@
                 android:includeFontPadding="false"
                 android:text="4"
                 android:textColor="@color/letter_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -223,7 +229,8 @@
                     android:includeFontPadding="false"
                     android:text="Back"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
                 <Button
                     android:id="@+id/letter_game_over_restart"
@@ -235,13 +242,13 @@
                     android:includeFontPadding="false"
                     android:text="Restart"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Game menu -->
     <LinearLayout
         android:id="@+id/letter_game_menu"
         android:layout_width="match_parent"
@@ -262,7 +269,8 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/back_thin100"
-            app:tint="@color/letter_border_soft" />
+            app:tint="@color/letter_border_soft"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/letter_game_menu_play"
@@ -272,7 +280,8 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/play_outline100"
-            app:tint="@color/letter_border_soft" />
+            app:tint="@color/letter_border_soft"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/letter_game_menu_retry"
@@ -282,6 +291,7 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/retry100"
-            app:tint="@color/letter_border_soft" />
+            app:tint="@color/letter_border_soft"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </FrameLayout>

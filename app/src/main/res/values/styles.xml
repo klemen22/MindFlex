@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.MindFlex" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:textColorPrimary">@color/stats_text_primary</item>
+
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnBackground">@color/black</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorError">@color/red</item>
+        <item name="colorOnError">@color/white</item>
+    </style>
+
+    <style name="Theme.MindFlex" parent="Base.Theme.MindFlex">
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@color/white</item>
+    </style>
+
     <style name="DatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">@color/white</item>
         <item name="colorAccent">@color/stats_accent</item>
@@ -12,4 +33,5 @@
     <style name="DatePickerButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/stats_text_primary</item>
     </style>
+
 </resources>

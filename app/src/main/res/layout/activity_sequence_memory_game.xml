@@ -2,6 +2,7 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,7 +14,6 @@
         android:elevation="100dp"
         android:visibility="visible" />
 
-    <!-- Start screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/sequence_start"
         android:layout_width="300dp"
@@ -23,7 +23,8 @@
         android:elevation="8dp"
         android:visibility="visible"
         app:cardCornerRadius="16dp"
-        app:cardElevation="100dp">
+        app:cardElevation="100dp"
+        tools:ignore="TextSizeCheck">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +41,8 @@
                 android:fontFamily="@font/rajdhani_semibold"
                 android:text="Sequence Memory Game"
                 android:textColor="@color/sequence_text_primary"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/sequence_start_button"
@@ -54,15 +56,15 @@
                 android:paddingVertical="12dp"
                 android:text="Start"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
         </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
 
 
-    <!-- Main game screen -->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/sequence_game_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -82,7 +84,8 @@
             android:includeFontPadding="false"
             android:text="Level: 1"
             android:textColor="@color/sequence_text_primary"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            tools:ignore="HardcodedText" />
 
         <View
             android:layout_width="match_parent"
@@ -113,12 +116,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tint="@color/sequence_border_soft" />
+                app:tint="@color/sequence_border_soft"
+                tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <!-- Game over screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/sequence_game_over"
         android:layout_width="300dp"
@@ -144,7 +147,8 @@
                 android:fontFamily="@font/rajdhani_semibold"
                 android:text="Game over!"
                 android:textColor="@color/sequence_text_primary"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:ignore="HardcodedText" />
 
 
             <LinearLayout
@@ -163,7 +167,8 @@
                     android:includeFontPadding="false"
                     android:text="Back"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
 
                 <Button
@@ -176,14 +181,14 @@
                     android:includeFontPadding="false"
                     android:text="Play again"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 
-    <!-- Game menu -->
     <LinearLayout
         android:id="@+id/sequence_game_menu"
         android:layout_width="match_parent"
@@ -204,7 +209,8 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/back_thin100"
-            app:tint="@color/sequence_border_soft" />
+            app:tint="@color/sequence_border_soft"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/sequence_game_menu_play_button"
@@ -214,7 +220,8 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/play_outline100"
-            app:tint="@color/sequence_border_soft" />
+            app:tint="@color/sequence_border_soft"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/sequence_game_menu_retry_button"
@@ -224,7 +231,8 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/retry100"
-            app:tint="@color/sequence_border_soft" />
+            app:tint="@color/sequence_border_soft"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </FrameLayout>
 

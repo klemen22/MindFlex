@@ -1,52 +1,58 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
-    android:elevation="10dp">
+    android:elevation="10dp"
+    android:padding="20dp">
 
     <LinearLayout
         android:id="@+id/dialog_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/tile_background"
         android:orientation="vertical"
         android:padding="20dp"
-        android:background="@drawable/tile_background">
+        tools:ignore="UselessParent">
 
         <ImageView
+            android:id="@+id/dialog_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/dialog_image"
             android:layout_gravity="start"
-            android:src="@drawable/place_holder2"/>
+            android:src="@drawable/place_holder2"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/dialog_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Game title"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
+            android:layout_gravity="start"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/rajdhani_semibold"
             android:includeFontPadding="false"
-            android:layout_gravity="start"/>
+            android:text="Game title"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/dialog_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
+            android:fontFamily="@font/rajdhani_regular"
             android:text="Description place holder"
             android:textColor="@color/white"
-            android:fontFamily="@font/rajdhani_regular"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            tools:ignore="HardcodedText,SpUsage,TextSizeCheck" />
 
         <Button
+            android:id="@+id/dialog_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dialog_button"
-            android:text="Play"
+            android:layout_gravity="end"
             android:layout_marginTop="18dp"
-            android:layout_gravity="end"/>
+            android:text="Play"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 </FrameLayout>

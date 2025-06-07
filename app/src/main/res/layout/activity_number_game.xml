@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/number_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,7 +17,6 @@
         android:elevation="100dp"
         android:visibility="visible" />
 
-    <!-- Start screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/number_start"
         android:layout_width="300dp"
@@ -43,7 +43,8 @@
                 android:fontFamily="@font/rajdhani_semibold"
                 android:text="Number Memory"
                 android:textColor="@color/number_text_primary"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/number_game_highscore"
@@ -53,7 +54,8 @@
                 android:fontFamily="@font/rajdhani_regular"
                 android:text="Highscore: 0"
                 android:textColor="@color/number_text_primary"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/number_start_button"
@@ -64,17 +66,18 @@
                 android:fontFamily="@font/rajdhani_regular"
                 android:text="Start"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Game screen -->
     <ScrollView
         android:id="@+id/number_main_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
             android:id="@+id/number_game_screen"
@@ -83,7 +86,8 @@
             android:gravity="center"
             android:orientation="vertical"
             android:padding="14dp"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:ignore="ScrollViewSize">
 
             <TextView
                 android:id="@+id/number_instruction"
@@ -92,7 +96,8 @@
                 android:fontFamily="@font/rajdhani_medium"
                 android:text="Get ready..."
                 android:textColor="@color/number_text_primary"
-                android:textSize="28sp" />
+                android:textSize="28sp"
+                tools:ignore="HardcodedText" />
 
             <ProgressBar
                 android:id="@+id/number_timer_bar"
@@ -117,7 +122,8 @@
                 android:text="123"
                 android:textColor="@color/number_text_primary"
                 android:textSize="32sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/number_input"
@@ -128,10 +134,11 @@
                 android:fontFamily="@font/rajdhani_regular"
                 android:hint="Enter the number"
                 android:inputType="number"
-                android:textColorHint="@color/number_text_light"
                 android:textColor="@color/number_text_primary"
+                android:textColorHint="@color/number_text_light"
                 android:textSize="20sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:ignore="Autofill,HardcodedText" />
 
             <Button
                 android:id="@+id/number_submit"
@@ -143,7 +150,8 @@
                 android:text="Submit"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/number_feedback"
@@ -154,7 +162,8 @@
                 android:text="Correct!"
                 android:textColor="@color/number_text_primary"
                 android:textSize="20sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
     </ScrollView>
@@ -175,11 +184,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:tint="@color/number_border_soft" />
+            app:tint="@color/number_border_soft"
+            tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!-- Game over screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/number_game_over"
         android:layout_width="300dp"
@@ -208,7 +217,8 @@
                 android:includeFontPadding="false"
                 android:text="Wrong! Correct was: X"
                 android:textColor="@color/number_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/number_game_over_score"
@@ -219,7 +229,8 @@
                 android:includeFontPadding="false"
                 android:text="You entered: \nFinal score:"
                 android:textColor="@color/number_text_primary"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -238,7 +249,8 @@
                     android:includeFontPadding="false"
                     android:text="Back"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
                 <Button
                     android:id="@+id/number_game_over_restart"
@@ -250,13 +262,13 @@
                     android:includeFontPadding="false"
                     android:text="Restart"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Game menu -->
     <LinearLayout
         android:id="@+id/number_game_menu"
         android:layout_width="match_parent"
@@ -277,7 +289,8 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/back_thin100"
-            app:tint="@color/number_border_soft" />
+            app:tint="@color/number_border_soft"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/number_game_menu_play"
@@ -287,7 +300,8 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/play_outline100"
-            app:tint="@color/number_border_soft" />
+            app:tint="@color/number_border_soft"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/number_game_menu_retry"
@@ -297,7 +311,8 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/retry100"
-            app:tint="@color/number_border_soft" />
+            app:tint="@color/number_border_soft"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 
 </FrameLayout>

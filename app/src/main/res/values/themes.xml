@@ -1,5 +1,0 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.MindFlex" parent="Base.Theme.MindFlex">
-        <item name="android:windowSplashScreenBackground">@color/white</item>
-    </style>
-</resources>

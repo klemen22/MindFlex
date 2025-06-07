@@ -1,4 +1,4 @@
-package com.example.mindflex.game.activites;
+package com.example.mindflex.game.activities;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.Toast.*;

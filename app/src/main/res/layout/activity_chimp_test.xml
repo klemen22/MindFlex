@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".game.activites.ChimpTestActivity">
+    tools:context=".game.activities.ChimpTestActivity">
 
     <View
         android:id="@+id/chimp_overlay"
@@ -14,7 +14,6 @@
         android:elevation="100dp"
         android:visibility="visible" />
 
-    <!-- Start screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/chimp_start"
         android:layout_width="300dp"
@@ -42,7 +41,8 @@
                 android:includeFontPadding="false"
                 android:text="Chimp test"
                 android:textColor="@color/chimp_text_primary"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/chimp_start_button"
@@ -55,11 +55,11 @@
                 android:includeFontPadding="false"
                 android:text="Start"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Mid-round screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/chimp_mid_round"
         android:layout_width="300dp"
@@ -86,7 +86,8 @@
                 android:fontFamily="@font/rajdhani_semibold"
                 android:text="Numbers"
                 android:textColor="@color/chimp_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/chimp_mid_round_number"
@@ -97,7 +98,8 @@
                 android:includeFontPadding="false"
                 android:text="4"
                 android:textColor="@color/chimp_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,7 +109,8 @@
                 android:includeFontPadding="false"
                 android:text="Strikes"
                 android:textColor="@color/chimp_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/chimp_mid_round_strikes"
@@ -118,7 +121,8 @@
                 android:includeFontPadding="false"
                 android:text="0 of 3"
                 android:textColor="@color/chimp_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/chimp_mid_round_continue"
@@ -129,12 +133,12 @@
                 android:backgroundTint="@color/chimp_main"
                 android:fontFamily="@font/rajdhani_regular"
                 android:text="Continue"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Main game screen -->
     <LinearLayout
         android:id="@+id/chimp_main_game_screen"
         android:layout_width="match_parent"
@@ -150,16 +154,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            android:text="Round 1"
             android:fontFamily="@font/rajdhani_semibold"
             android:includeFontPadding="false"
+            android:text="Round 1"
             android:textColor="@color/chimp_text_primary"
-            android:textSize="28sp"/>
+            android:textSize="28sp"
+            tools:ignore="HardcodedText" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2.5dp"
-            android:background="@drawable/chimp_small_screen_background"/>
+            android:background="@drawable/chimp_small_screen_background" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -177,7 +182,7 @@
                 android:useDefaultMargins="false" />
 
         </LinearLayout>
-        
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -186,18 +191,18 @@
                 android:id="@+id/chimp_game_menu_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="10dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginBottom="10dp"
                 android:src="@drawable/menu100"
-                app:tint="@color/chimp_border_soft"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tint="@color/chimp_border_soft"
+                tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <!-- Game over screen -->
     <androidx.cardview.widget.CardView
         android:id="@+id/chimp_game_over"
         android:layout_width="300dp"
@@ -225,7 +230,8 @@
                 android:includeFontPadding="false"
                 android:text="Game Over!\nScore"
                 android:textColor="@color/chimp_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/chimp_game_over_score"
@@ -236,7 +242,8 @@
                 android:includeFontPadding="false"
                 android:text="4"
                 android:textColor="@color/chimp_text_primary"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                tools:ignore="HardcodedText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -250,30 +257,31 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/chimp_main"
                     android:fontFamily="@font/rajdhani_regular"
                     android:includeFontPadding="false"
                     android:text="Back"
-                    android:backgroundTint="@color/chimp_main"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
                 <Button
                     android:id="@+id/chimp_game_over_restart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
+                    android:backgroundTint="@color/chimp_main"
                     android:fontFamily="@font/rajdhani_regular"
                     android:includeFontPadding="false"
-                    android:backgroundTint="@color/chimp_main"
                     android:text="Restart"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="ButtonStyle,HardcodedText" />
 
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Game menu -->
     <LinearLayout
         android:id="@+id/chimp_game_menu"
         android:layout_width="match_parent"
@@ -290,30 +298,33 @@
             android:id="@+id/chimp_game_menu_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_weight="0.3"
             android:clickable="true"
             android:focusable="true"
-            android:layout_weight="0.3"
             android:src="@drawable/back_thin100"
-            app:tint="@color/chimp_border_soft" />
+            app:tint="@color/chimp_border_soft"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chimp_game_menu_play"
             android:layout_width="42dp"
             android:layout_height="42dp"
+            android:layout_weight="0.3"
             android:clickable="true"
             android:focusable="true"
-            android:layout_weight="0.3"
             android:src="@drawable/play_outline100"
-            app:tint="@color/chimp_border_soft"/>
+            app:tint="@color/chimp_border_soft"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chimp_game_menu_retry"
             android:layout_width="34dp"
             android:layout_height="34dp"
+            android:layout_weight="0.3"
             android:clickable="true"
             android:focusable="true"
-            android:layout_weight="0.3"
             android:src="@drawable/retry100"
-            app:tint="@color/chimp_border_soft"/>
+            app:tint="@color/chimp_border_soft"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </FrameLayout>
