@@ -1,4 +1,5 @@
 package com.example.mindflex.game.activities;
+
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,16 +11,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+
 import com.example.mindflex.HapticFeedbackManager;
 import com.example.mindflex.R;
 import com.example.mindflex.database.DailyActivityManager;
 import com.example.mindflex.database.HighScoreManager;
+
 import java.util.ArrayList;
 import java.util.Collections;
+
 public class ChimpTestActivity extends AppCompatActivity {
 
     private GridLayout gridLayout;
@@ -245,7 +250,7 @@ public class ChimpTestActivity extends AppCompatActivity {
                     if (strikes == 0) {
                         GameOver(tilesNum);
                     } else {
-                        MidRound(tilesNum);
+                        MidRound(round + 1);
                     }
                 }
             });
@@ -260,7 +265,7 @@ public class ChimpTestActivity extends AppCompatActivity {
         fadeIn(chimpMidRound, 300);
         fadeIn(chimpOverlay, 300);
 
-        chimpMidRoundNum.setText(String.valueOf(tileNum));
+        chimpMidRoundNum.setText(String.valueOf(tileNum + 3));
         chimpMidRoundStrike.setText(strikes + " of 3");
 
         chimpMidRoundContinue.setOnClickListener(v -> {

@@ -3,8 +3,6 @@ import android.content.Context;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
-// Score initializer is called on initial app launch and sets default values if game entries doesn't exist
 public class ScoreInitialize {
     private static final String[] game_ids = {"Chimp Game", "Verbal Game", "Number Mame",
                                               "Reaction Game", "Sequence Game", "Typing Game"};

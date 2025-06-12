@@ -179,7 +179,7 @@
                     android:backgroundTint="@color/sequence_main"
                     android:fontFamily="@font/rajdhani_regular"
                     android:includeFontPadding="false"
-                    android:text="Play again"
+                    android:text="Restart"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     tools:ignore="ButtonStyle,HardcodedText" />

@@ -1,4 +1,5 @@
 package com.example.mindflex.game.activities;
+
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,14 +13,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+
 import com.example.mindflex.HapticFeedbackManager;
 import com.example.mindflex.R;
 import com.example.mindflex.database.DailyActivityManager;
 import com.example.mindflex.database.HighScoreManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +41,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
 
     private boolean input = false;
     private boolean gameFlag = false;
+    private boolean gameMenuOpen = false;
     private CardView startScreen;
     private CardView gameOverScreen;
     private Button startButton;
@@ -58,7 +63,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sequence_memory_game);
 
-        HighScoreManager.getHighScore(this, "Sequence Game", score -> runOnUiThread(()->{
+        HighScoreManager.getHighScore(this, "Sequence Game", score -> runOnUiThread(() -> {
             highScore = score;
             Log.d("highscore", "Highscore: " + highScore);
         }));
@@ -94,54 +99,57 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             gameOverScreen.setVisibility(View.GONE);
             overlay.setVisibility(View.GONE);
             round = 0;
-            scoreText.setText("Level: "+ (round + 1));
+            scoreText.setText("Level: " + (round + 1));
             startRound();
             gameFlag = true;
         });
 
         sequenceMenuButton.setOnClickListener(v -> {
-            if(!gameFlag){
+            if (!gameFlag) {
                 return;
             }
+            gameMenuOpen = true;
             input = false;
             HapticFeedbackManager.HapticFeedbackLight(v);
 
-            overlay.animate().alpha(1f).setDuration(300).withEndAction(()->overlay.setVisibility(View.VISIBLE)).start();
-            sequenceMenuButton.animate().alpha(0f).setDuration(300).withEndAction(()->sequenceMenuButton.setVisibility(View.GONE)).start();
+            overlay.animate().alpha(1f).setDuration(300).withEndAction(() -> overlay.setVisibility(View.VISIBLE)).start();
+            sequenceMenuButton.animate().alpha(0f).setDuration(300).withEndAction(() -> sequenceMenuButton.setVisibility(View.GONE)).start();
             sequenceMenu.setVisibility(View.VISIBLE);
             sequenceMenu.setTranslationY(sequenceMenu.getHeight());
             sequenceMain.animate().translationY(-80).setDuration(300).start();
             sequenceMenu.animate().translationY(0).setDuration(300).start();
 
-            sequenceMenuBack.setOnClickListener(vv->{
+            sequenceMenuBack.setOnClickListener(vv -> {
                 HapticFeedbackManager.HapticFeedbackLight(vv);
                 onBackPressed();
             });
 
-            sequenceMenuPlay.setOnClickListener(vv->{
+            sequenceMenuPlay.setOnClickListener(vv -> {
                 HapticFeedbackManager.HapticFeedbackLight(vv);
                 input = true;
-                overlay.animate().alpha(0f).setDuration(300).withEndAction(()->overlay.setVisibility(View.GONE)).start();
-                sequenceMenuButton.animate().alpha(1f).setDuration(300).withEndAction(()->sequenceMenuButton.setVisibility(View.VISIBLE)).start();
+                gameMenuOpen = false;
+                overlay.animate().alpha(0f).setDuration(300).withEndAction(() -> overlay.setVisibility(View.GONE)).start();
+                sequenceMenuButton.animate().alpha(1f).setDuration(300).withEndAction(() -> sequenceMenuButton.setVisibility(View.VISIBLE)).start();
                 sequenceMain.animate().translationY(0).setDuration(300).start();
-                sequenceMenu.animate().translationY(sequenceMenu.getHeight()).setDuration(300).withEndAction(()->sequenceMenu.setVisibility(View.GONE)).start();
+                sequenceMenu.animate().translationY(sequenceMenu.getHeight()).setDuration(300).withEndAction(() -> sequenceMenu.setVisibility(View.GONE)).start();
             });
 
-            sequenceMenuRestart.setOnClickListener(vv->{
+            sequenceMenuRestart.setOnClickListener(vv -> {
+                gameMenuOpen = false;
                 HapticFeedbackManager.HapticFeedbackLight(vv);
                 Toast.makeText(this, "Restarting...", Toast.LENGTH_SHORT).show();
-                overlay.animate().alpha(0f).setDuration(300).withEndAction(()->overlay.setVisibility(View.GONE)).start();
-                sequenceMenuButton.animate().alpha(1f).setDuration(300).withEndAction(()->sequenceMenuButton.setVisibility(View.VISIBLE)).start();
+                overlay.animate().alpha(0f).setDuration(300).withEndAction(() -> overlay.setVisibility(View.GONE)).start();
+                sequenceMenuButton.animate().alpha(1f).setDuration(300).withEndAction(() -> sequenceMenuButton.setVisibility(View.VISIBLE)).start();
                 sequenceMain.animate().translationY(0).setDuration(300).start();
-                sequenceMenu.animate().translationY(sequenceMenu.getHeight()).setDuration(300).withEndAction(()->sequenceMenu.setVisibility(View.GONE)).start();
+                sequenceMenu.animate().translationY(sequenceMenu.getHeight()).setDuration(300).withEndAction(() -> sequenceMenu.setVisibility(View.GONE)).start();
                 round = 0;
-                scoreText.setText("Level: "+ (round + 1));
+                scoreText.setText("Level: " + (round + 1));
                 startRound();
             });
 
         });
 
-        for (int i = 0; i < 16; i++){
+        for (int i = 0; i < 16; i++) {
             View tile = new View(this);
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = tileSize;
@@ -153,44 +161,43 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
 
             final int index = i;
             tile.setOnClickListener(v -> {
-                if(!input){
+                if (!input) {
                     return;
                 }
                 HapticFeedbackManager.HapticFeedbackStrong(v);
 
-                if(index == tilesSequence.get(currentIndex)){
-                    tile.animate().alpha(1f).setDuration(200).withEndAction(()->tile.setBackgroundResource(R.drawable.sequence_tile_background_correct)).start();
+                if (index == tilesSequence.get(currentIndex)) {
+                    tile.animate().alpha(1f).setDuration(200).withEndAction(() -> tile.setBackgroundResource(R.drawable.sequence_tile_background_correct)).start();
 
                     currentIndex++;
 
-                    if(currentIndex == tilesSequence.size()){
+                    if (currentIndex == tilesSequence.size()) {
                         round++;
-                        scoreText.setText("Level: "+ (round + 1));
+                        scoreText.setText("Level: " + (round + 1));
                         rootView.postDelayed(this::startRound, 600);
                     }
 
-                }
-                else{
-                    tile.animate().alpha(1f).setDuration(200).withEndAction(()->tile.setBackgroundResource(R.drawable.sequence_tile_background_error)).start();
+                } else {
+                    tile.animate().alpha(1f).setDuration(200).withEndAction(() -> tile.setBackgroundResource(R.drawable.sequence_tile_background_error)).start();
                     input = false;
                     gameOverScreen.setVisibility(View.VISIBLE);
                     overlay.setVisibility(View.VISIBLE);
 
-                    if (round > highScore){
+                    if (round > highScore) {
                         HighScoreManager.insertHighScore(this, "Sequence Game", round);
                     }
 
-                    DailyActivityManager.RecordGame(this,"Sequence Game");
+                    DailyActivityManager.RecordGame(this, "Sequence Game");
 
                     retryButton.setOnClickListener(v1 -> {
                         HapticFeedbackManager.HapticFeedbackLight(v1);
-                        for(View tile1 : tiles){
+                        for (View tile1 : tiles) {
                             tile1.setBackgroundResource(R.drawable.sequence_tile_background);
                         }
                         gameOverScreen.setVisibility(View.GONE);
                         overlay.setVisibility(View.GONE);
                         round = 0;
-                        scoreText.setText("Level: "+ (round + 1));
+                        scoreText.setText("Level: " + (round + 1));
                         rootView.postDelayed(this::startRound, 600);
                     });
                     quitButton.setOnClickListener(v1 -> {
@@ -206,8 +213,9 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
         }
 
     }
-    private void startRound(){
-        for(View tile : tiles){
+
+    private void startRound() {
+        for (View tile : tiles) {
             tile.setBackgroundResource(R.drawable.sequence_tile_background);
         }
         tilesSequence.clear();
@@ -220,7 +228,7 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             return;
         }
 
-        for(int i = 0; i < round + 1; i++){
+        for (int i = 0; i < round + 1; i++) {
             int randomNum = (int) (Math.random() * 16);
             tilesSequence.add(randomNum);
         }
@@ -229,10 +237,10 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
     }
 
 
-    private void showSequence(){
+    private void showSequence() {
         input = false;
 
-        for(int i = 0; i < tilesSequence.size(); i++){
+        for (int i = 0; i < tilesSequence.size(); i++) {
             int index = tilesSequence.get(i);
             View tile = tiles.get(index);
 
@@ -243,12 +251,12 @@ public class SequenceMemoryGameActivity extends AppCompatActivity {
             }, i * 800L);
 
             int finalI = i;
-            tile.postDelayed(()->{
+            tile.postDelayed(() -> {
                 tile.setAlpha(1f);
                 tile.animate().alpha(0f).setDuration(200).start();
-                tile.animate().alpha(1f).setDuration(200).withEndAction(()-> tile.setBackgroundResource(R.drawable.sequence_tile_background)).start();
+                tile.animate().alpha(1f).setDuration(200).withEndAction(() -> tile.setBackgroundResource(R.drawable.sequence_tile_background)).start();
 
-                if(finalI == tilesSequence.size() - 1){
+                if ((finalI == tilesSequence.size() - 1) && !gameMenuOpen) {
                     input = true;
                 }
             }, i * 800L + 800);
